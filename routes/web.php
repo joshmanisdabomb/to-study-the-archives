@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Version;
+use App\Models\VersionGroup;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function() {
+    return view('dashboard');
+})->name('home');
+
+Route::get('/downloads', function() {
+    return view('downloads', [
+        'groups' => VersionGroup::whereHas('versions', function(Builder $query) {})->where([])->orderBy('order')->get()
+    ]);
+})->name('downloads');
+
+//require __DIR__.'/auth.php';
