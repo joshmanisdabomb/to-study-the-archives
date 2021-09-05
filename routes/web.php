@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Models\Version;
 use App\Models\VersionGroup;
 use Illuminate\Database\Eloquent\Builder;
@@ -19,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function() {
     return view('dashboard');
 })->name('home');
+
+Route::get('/{slug1}/{slug2}', [ArticleController::class, 'view'])->where(['slug1', 'slug2'], '[a-zA-Z0-9_]+')->name('article');
 
 Route::get('/downloads', function() {
     return view('downloads', [

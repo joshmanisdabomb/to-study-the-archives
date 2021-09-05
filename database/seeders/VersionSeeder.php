@@ -569,7 +569,7 @@ Added loot table, lang, block state, item model, tag, advancement data generator
             ],
         ]);
 
-        //LCC Forge
+        //LCC Fabric
         DB::table('versions')->insert([
             [
                 'mod_version' => '0.1.0',

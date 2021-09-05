@@ -28,20 +28,22 @@ class CreateArticles extends Migration
 
         Schema::create('article_sections', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('article_id')->references('id')->on('articles');
+            $table->foreignId('article_id')->references('id')->on('articles')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('name');
             $table->string('type');
             $table->smallInteger('order');
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('article_fragments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('section_id')->references('id')->on('articles');
+            $table->foreignId('section_id')->references('id')->on('article_sections')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('type');
             $table->json('markup');
             $table->smallInteger('order');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
