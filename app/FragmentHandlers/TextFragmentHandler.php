@@ -8,10 +8,10 @@ use RuntimeException;
 
 class TextFragmentHandler extends FragmentHandler {
 
-    public static function getMarkup(ArticleFragment $fragment) : string {
-        $translations = $fragment->markup['translations']['en_us'];
-        $content = self::getTextMarkup($fragment->markup['content'], $translations);
-        $content = sprintf($content, ...array_map(fn($insert) => self::getTextMarkup($insert, $translations), $fragment->markup['inserts']));
+    public static function getMarkup(array $fragment) : string {
+        $translations = $fragment['translations']['en_us'];
+        $content = self::getTextMarkup($fragment['content'], $translations);
+        $content = sprintf($content, ...array_map(fn($insert) => self::getTextMarkup($insert, $translations), $fragment['inserts']));
         return $content;
     }
 
@@ -19,6 +19,8 @@ class TextFragmentHandler extends FragmentHandler {
         if (isset($text['text'])) $ret = $text['text'];
         else if (isset($text['translate'])) $ret = $translations[$text['translate']];
         else throw new RuntimeException("Could not parse text.");
+
+        $ret = nl2br($ret);
 
         if (isset($text['link'])) {
             $parts = explode('/', $text['link'], 2);

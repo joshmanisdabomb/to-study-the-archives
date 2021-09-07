@@ -16,6 +16,6 @@ abstract class FragmentHandler {
         return Str::snake($shortName);
     }
 
-    public static abstract function getMarkup(ArticleFragment $fragment) : string;
+    public static abstract function getMarkup(array $fragment) : string;
 
 }
