@@ -12,10 +12,16 @@ class TableFragmentHandler extends FragmentHandler {
         $content = '';
         foreach ($fragment['rows'] as $row) {
             $content .= '<tr>';
-            foreach ($row as $cell) {
-                $type = $cell['fragment'];
-                $handler = FragmentHandler::getHandlerForType($type);
-                $content .= '<td class="border border-gray-300 px-1.5 py-0.5">' . $handler::getMarkup($cell) . '</td>';
+            foreach ($row['cells'] as $cell) {
+                $heading = $cell['heading'] ?? null;
+                $tag = $heading ? 'th' : 'td';
+                $content .= '<' . $tag . ' class="border border-gray-300 px-1.5 py-0.5">';
+                foreach ($cell['fragments'] as $fragment) {
+                    $type = $fragment['fragment'];
+                    $handler = FragmentHandler::getHandlerForType($type);
+                    $content .= '<p>' . $handler::getMarkup($fragment) . '</p>';
+                }
+                $content .= '</' . $tag . '>';
             }
             $content .= '</tr>';
         }
