@@ -1,6 +1,6 @@
 <?php
 
-namespace App\FragmentHandlers;
+namespace App\Handlers\Fragment;
 
 use App\Models\Article;
 use App\Models\ArticleFragment;

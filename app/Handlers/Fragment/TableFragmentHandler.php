@@ -1,10 +1,6 @@
 <?php
 
-namespace App\FragmentHandlers;
-
-use App\Models\Article;
-use App\Models\ArticleFragment;
-use RuntimeException;
+namespace App\Handlers\Fragment;
 
 class TableFragmentHandler extends FragmentHandler {
 

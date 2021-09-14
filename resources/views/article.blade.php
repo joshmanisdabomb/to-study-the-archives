@@ -1,4 +1,8 @@
 <x-app-layout>
+    <div id="gui-tooltip" class="mc-text">
+        <span id="gui-tooltip-text">Minecraft Tip</span>
+    </div>
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __($article->name) }}

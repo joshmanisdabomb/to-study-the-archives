@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\FragmentHandlers\FragmentHandler;
+use App\Handlers\Fragment\FragmentHandler;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
