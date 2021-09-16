@@ -17,7 +17,11 @@
                         <h1 class="font-semibold text-2xl pt-2">{{ $section->name }}</h1>
                         @foreach ($section->fragments as $fragment)
                             <p class="pb-2">
-                                {!! ($fragment->handler)::getMarkup($fragment->markup) !!}
+                                @if (class_exists($fragment->handler))
+                                    {!! ($fragment->handler)::getMarkup($fragment->markup) !!}
+                                @else
+                                    @php dump($fragment) @endphp
+                                @endif
                             </p>
                         @endforeach
                     @endforeach

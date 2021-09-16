@@ -2,6 +2,11 @@
 
 namespace App\Handlers\Fragment;
 
+use Symfony\Component\VarDumper\Cloner\AbstractCloner;
+use Symfony\Component\VarDumper\Cloner\VarCloner;
+use Symfony\Component\VarDumper\Dumper\HtmlDumper;
+use Symfony\Component\VarDumper\VarDumper;
+
 class TableFragmentHandler extends FragmentHandler {
 
     public static function getMarkup(array $fragment) : string {
@@ -15,7 +20,19 @@ class TableFragmentHandler extends FragmentHandler {
                 foreach ($cell['fragments'] as $fragment) {
                     $type = $fragment['fragment'];
                     $handler = FragmentHandler::getHandlerForType($type);
-                    $content .= '<p>' . $handler::getMarkup($fragment) . '</p>';
+                    if (class_exists($handler)) {
+                        $content .= '<p>' . $handler::getMarkup($fragment) . '</p>';
+                    } else {
+                        $cloner = new VarCloner();
+                        $dumper = new HtmlDumper();
+
+                        $dumper->dump(
+                            $cloner->cloneVar($fragment),
+                            function ($line, $depth) use (&$content) {
+                                if ($depth >= 0) $content .= str_repeat('  ', $depth).$line."\n";
+                            }
+                        );
+                    }
                 }
                 $content .= '</' . $tag . '>';
             }

@@ -1,0 +1,23 @@
+@import 'master';
+
+.wiki-separator {
+    padding: 0 2px;
+    color: #999;
+}
+
+.wiki-color {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px;
+}
+
+.wiki-color > div {
+    display: inline-block;
+    background-image: url("/images/gui/swatch1.png"), url("/images/gui/swatch2.png");
+    background-blend-mode: multiply, normal;
+    width: 24px * 2;
+    height: 12px * 2;
+    background-size: cover;
+    image-rendering: pixelated;
+}

@@ -1,4 +1,4 @@
-$gui-scale: 4;
+@import '_master';
 
 @font-face {
     font-family: "Minecraft";
@@ -87,6 +87,11 @@ $gui-scale: 4;
     text-align: right;
     padding: 1.25px * $gui-scale;
     pointer-events: none;
+}
+
+.gui-stacks {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #gui-tooltip {
