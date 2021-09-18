@@ -21,10 +21,6 @@ abstract class RecipeHandler {
 
     public static abstract function getMarkup(array $fragment) : string;
 
-    public static function renderItem(string $namespace, string $path) {
-        return '<img src="' . asset('images/models/' . $namespace . '/' . $path . '.png') . '" alt="' . $namespace . ':' . $path . '">';
-    }
-
     public static function getShapedIngredients(array $pattern, array $key, ?int $padWidth, ?int $padHeight, array $translations = []) : array {
         $grid = [];
         foreach ($pattern as $row) {
@@ -38,7 +34,7 @@ abstract class RecipeHandler {
                 $gr = array_pad($gr, $padWidth, null);
                 $gr = array_map(function (?array $ing) use ($translations) {
                     if (!$ing) return null;
-                    return (new Ingredient($ing))->setNameFrom($translations);
+                    return (Ingredient::fromArray($ing))->setNameFrom($translations);
                 }, $gr);
                 $grid[] = $gr;
             }
@@ -48,7 +44,7 @@ abstract class RecipeHandler {
     }
 
     public static function getShapelessIngredients(array $ingredients, ?int $padWidth, ?int $padHeight, array $translations = []) : array {
-        $list = collect($ingredients)->map(fn(array $ing) => (new Ingredient($ing))->setNameFrom($translations))->all();
+        $list = collect($ingredients)->map(fn(array $ing) => (Ingredient::fromArray($ing))->setNameFrom($translations))->all();
         if ($padWidth == null && $padHeight == null) return $list;
         $grid = [];
         for ($i = 0; $i < $padHeight; $i++) {

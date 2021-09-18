@@ -1,3 +1,5 @@
+//Tooltip
+
 const tooltip = document.getElementById('gui-tooltip');
 const xOffset = 15;
 const yOffset = -35;

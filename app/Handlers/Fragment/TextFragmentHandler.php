@@ -12,7 +12,7 @@ class TextFragmentHandler extends FragmentHandler {
 
     public static function getMarkup(array $fragment) : string {
         $content = self::getTextMarkup($fragment['content']);
-        $content = sprintf($content, ...array_map(fn($insert) => self::getTextMarkup($insert), $fragment['inserts']));
+        $content = sprintf($content, ...array_map(fn(array $insert) => self::getTextMarkup($insert), $fragment['inserts']));
         return $content;
     }
 

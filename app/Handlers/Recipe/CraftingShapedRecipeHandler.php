@@ -13,7 +13,7 @@ class CraftingShapedRecipeHandler extends GridRecipeHandler {
     }
 
     protected static function getIngredientResult(array $recipe) : Ingredient {
-        return (new Ingredient($recipe['result']))->setNameFrom($recipe['translations']);
+        return (Ingredient::fromArray($recipe['result']))->setNameFrom($recipe['translations']);
     }
 
     protected static function getGridWidth(array $recipe) : int {

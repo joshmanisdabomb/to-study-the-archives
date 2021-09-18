@@ -19,4 +19,4 @@ mix
         require('autoprefixer'),
     ])
     .sass('resources/sass/sass.scss', 'public/css')
-    .scripts(['resources/js/gui.js'], 'public/js/script.js');
+    .scripts(['resources/js/slot.js', 'resources/js/tooltip.js'], 'public/js/script.js');
