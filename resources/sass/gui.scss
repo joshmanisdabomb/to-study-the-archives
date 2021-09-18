@@ -1,5 +1,7 @@
 @import '_master';
 
+$refiner-icons: 10;
+
 @font-face {
     font-family: "Minecraft";
     src: url("/fonts/MinecraftRegular.otf");
@@ -60,6 +62,9 @@
     border-image-slice: 4 fill;
     border-image-repeat: repeat;
     image-rendering: pixelated;
+    display: flex;
+    flex-direction: column;
+    gap: 4px * $gui-scale;
 }
 
 .gui-tab + .gui-border {
@@ -87,6 +92,14 @@
 
 .gui-arrow {
     width: 22px * $gui-scale;
+}
+
+.gui-power {
+    width: 10px * $gui-scale;
+}
+
+.gui-time {
+    width: 12px * $gui-scale;
 }
 
 .gui-large-slot {
@@ -117,6 +130,31 @@
 .gui-stacks {
     display: flex;
     flex-wrap: wrap;
+}
+
+.gui-recipe-stats {
+    display: flex;
+    gap: 6px * $gui-scale;
+}
+
+.gui-recipe-stats > div {
+    display: flex;
+    align-items: center;
+    gap: 3px * $gui-scale;
+}
+
+.gui-refiner-icon {
+    width: 14px * $gui-scale;
+    height: 14px * $gui-scale;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@for $i from 0 to $refiner-icons {
+    .gui-refiner-icon-#{$i} {
+        background-image: url('/images/gui/refiner.png');
+        background-position-y: 14px * $gui-scale * -$i;
+    }
 }
 
 img.gui-ingredient {
