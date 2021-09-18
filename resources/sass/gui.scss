@@ -32,6 +32,27 @@
     font-style: oblique;
 }
 
+.gui {
+    display: flex;
+}
+
+.gui + .gui {
+    margin-top: 5px * $gui-scale;
+}
+
+.gui-tab {
+    background-image: url('/images/gui/tab.png');
+    width: 22px * $gui-scale;
+    height: 28px * $gui-scale;
+    background-repeat: no-repeat;
+    background-size: cover;
+    image-rendering: pixelated;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
 .gui-border {
     border-width: 4px * $gui-scale;
     padding: 6px * $gui-scale;
@@ -39,6 +60,11 @@
     border-image-slice: 4 fill;
     border-image-repeat: repeat;
     image-rendering: pixelated;
+}
+
+.gui-tab + .gui-border {
+    position: relative;
+    left: -4px * $gui-scale;
 }
 
 .gui-recipe {
@@ -50,14 +76,13 @@
 .gui-slot {
     width: 18px * $gui-scale;
     height: 18px * $gui-scale;
-    background-image: url('/images/gui/slot.png');
-    background-repeat: no-repeat;
-    background-size: cover;
     image-rendering: pixelated;
 }
 
-.gui-slot img {
-    image-rendering: high-quality;
+.gui-slot-back {
+    background-image: url('/images/gui/slot.png');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .gui-arrow {
@@ -92,6 +117,10 @@
 .gui-stacks {
     display: flex;
     flex-wrap: wrap;
+}
+
+img.gui-ingredient {
+    image-rendering: high-quality;
 }
 
 #gui-tooltip {

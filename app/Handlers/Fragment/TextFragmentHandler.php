@@ -2,6 +2,7 @@
 
 namespace App\Handlers\Fragment;
 
+use App\Handlers\Link\LinkHandler;
 use App\Models\Article;
 use App\Models\ArticleFragment;
 use Illuminate\Support\Facades\App;
@@ -27,11 +28,9 @@ class TextFragmentHandler extends FragmentHandler {
         $ret = nl2br($ret);
 
         if (isset($text['link'])) {
-            $parts = explode('/', $text['link'], 2);
-            $slug1 = explode(':', $parts[0], 2)[1];
-            $slug2 = explode(':', $parts[1], 2)[1];
-            $article = Article::where('slug1', $slug1)->where('slug2', $slug2)->first();
-            return '<a class="underline text-' . ($article ? 'blue-500' : 'red-400') . ' hover:text-' . ($article ? 'blue-800' : 'red-700') . ' visited:text-' . ($article ? 'blue-600' : 'red-500') . '" href="' . route('article', compact('slug1', 'slug2')) . '">' . $ret . '</a>';
+            $link = $text['link'];
+            $handler = LinkHandler::getHandlerForType($link['type']);
+            return $handler::getTextMarkup($link, $ret);
         }
 
         return $ret;

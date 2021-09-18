@@ -16,7 +16,7 @@ use Symfony\Component\VarDumper\VarDumper;
 class StackFragmentHandler extends FragmentHandler {
 
     public static function getMarkup(array $fragment) : string {
-        return '<div class="gui-stacks">' . collect($fragment['stacks'])->map(fn(array $stack) => RecipeHandler::renderSlot((Ingredient::fromArray($stack))->setNameFrom($fragment['translations'])))->implode('') . '</div>';
+        return '<div class="gui-stacks">' . collect($fragment['stacks'])->map(fn(array $stack) => RecipeHandler::renderSlot((Ingredient::fromArray($stack))->setNameFrom($fragment['translations'])->setLinkFrom($fragment['links'])))->implode('') . '</div>';
     }
 
 }

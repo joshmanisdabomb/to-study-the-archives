@@ -19,7 +19,10 @@ class RecipeFragmentHandler extends FragmentHandler {
             $type = explode(':', $recipe['type'], 2);
             $handler = RecipeHandler::getHandlerForType($type[0], $type[1]);
             if (class_exists($handler)) {
-                $content .= '<div class="gui-border">' . $handler::getMarkup($recipe) . '</div>';
+                $tab = $handler::getTabMarkup($recipe);
+                $tab = $tab ? ('<div class="gui-tab">' . $tab . '</div>') : '';
+                $markup = $handler::getMarkup($recipe);
+                $content .= '<div class="gui">' . $tab . '<div class="gui-border">' . $markup . '</div></div>';
             } else {
                 $cloner = new VarCloner();
                 $dumper = new HtmlDumper();

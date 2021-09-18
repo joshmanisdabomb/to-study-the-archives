@@ -6,6 +6,4 @@ use App\Models\Ingredient;
 
 class PolymerizationRecipeHandler extends RefiningShapelessRecipeHandler {
 
-
-
 }

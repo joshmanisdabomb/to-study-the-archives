@@ -20,6 +20,11 @@ class MultiIngredient extends Ingredient {
         return $this;
     }
 
+    public function setLinkFrom(array $links) : Ingredient {
+        collect($this->ingredients)->each(fn(Ingredient $ing) => $ing->setLinkFrom($links));
+        return $this;
+    }
+
     public function insideSlot() : string {
         return collect($this->ingredients)->map(fn(Ingredient $ing, int $key) => '<div class="gui-slot-entry" style="display: ' . ($key == 0 ? 'block' : 'none') . ';">' . $ing->insideSlot() . '</div>')->implode('');
     }

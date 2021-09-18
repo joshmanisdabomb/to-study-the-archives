@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Handlers\Link\LinkHandler;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
@@ -9,7 +10,7 @@ use Jenssegers\Model\Model;
 
 class Ingredient extends Model {
 
-    protected $fillable = ['item', 'tag', 'count', 'translation', 'vararg'];
+    protected $fillable = ['item', 'tag', 'count', 'translation', 'link', 'vararg'];
 
     public function getIdAttribute() : ?string {
         return $this->item;
@@ -37,10 +38,21 @@ class Ingredient extends Model {
         return $this;
     }
 
+    public function setLinkFrom(array $links) : Ingredient {
+        if ($this->item) {
+            $this->link = $links[$this->item] ?? null;
+        }
+        return $this;
+    }
+
     public function insideSlot() : string {
         $content = '';
         if ($this->item) {
-            $content .= '<img src="' . asset('images/models/' . $this->namespace . '/' . $this->path . '.png') . '" alt="' . $this->name . '" data-mctooltip="' . $this->name . '">';
+            $content .= '<img class="gui-ingredient" src="' . asset('images/models/' . $this->namespace . '/' . $this->path . '.png') . '" alt="' . $this->name . '" data-mctooltip="' . $this->name . '">';
+        }
+        if ($this->link) {
+            $handler = LinkHandler::getHandlerForType($this->link['type']);
+            $content = $handler::getImageMarkup($this->link, $content);
         }
         if ($this->vararg) $this->count = '...';
         if (!is_numeric($this->count) || $this->count > 1) {
@@ -48,8 +60,6 @@ class Ingredient extends Model {
         }
         return $content;
     }
-
-
 
     public static function fromArray($arr) : Ingredient {
         if (Arr::isAssoc($arr)) {
