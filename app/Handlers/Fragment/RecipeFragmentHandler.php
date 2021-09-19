@@ -15,6 +15,7 @@ class RecipeFragmentHandler extends FragmentHandler {
 
     public static function getMarkup(array $fragment) : string {
         $content = '';
+        if (count($fragment['recipes']) < 1) return 'No recipes.';
         foreach ($fragment['recipes'] as $recipe) {
             $type = explode(':', $recipe['type'], 2);
             $handler = RecipeHandler::getHandlerForType($type[0], $type[1]);
