@@ -23,7 +23,25 @@ class RecipeFragmentHandler extends FragmentHandler {
                 $tab = $handler::getTabMarkup($recipe);
                 $tab = $tab ? ('<div class="gui-tab">' . $tab . '</div>') : '';
                 $markup = $handler::getMarkup($recipe);
-                $content .= '<div class="gui">' . $tab . '<div class="gui-border">' . $markup . '</div></div>';
+                $content .= '<div class="gui ' . (($fragment['obsolete'] ?? false) ? 'gui-transparent' : '') . '">' . $tab . '<div class="gui-border">' . $markup . '</div>';
+                $note = $fragment['note'] ?? null;
+                if ($note) {
+                    $handler = FragmentHandler::getHandlerForType($note['fragment']);
+                    if (class_exists($handler)) {
+                        $content .= '<p class="wiki-recipe-note">' . $handler::getMarkup($note) . '</p>';
+                    } else {
+                        $cloner = new VarCloner();
+                        $dumper = new HtmlDumper();
+
+                        $dumper->dump(
+                            $cloner->cloneVar($note),
+                            function ($line, $depth) use (&$content) {
+                                if ($depth >= 0) $content .= str_repeat('  ', $depth).$line."\n";
+                            }
+                        );
+                    }
+                }
+                $content .= '</div>';
             } else {
                 $cloner = new VarCloner();
                 $dumper = new HtmlDumper();

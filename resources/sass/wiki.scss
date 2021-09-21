@@ -21,3 +21,7 @@
     background-size: cover;
     image-rendering: pixelated;
 }
+
+.wiki-recipe-note {
+    padding: (4px * $gui-scale) 0;
+}

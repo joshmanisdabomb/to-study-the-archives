@@ -42,6 +42,15 @@ $refiner-icons: 10;
     margin-top: 5px * $gui-scale;
 }
 
+.gui-transparent {
+    opacity: 0.5;
+    transition: opacity 0.5s;
+}
+
+.gui-transparent:hover {
+    opacity: 1;
+}
+
 .gui-tab {
     background-image: url('/images/gui/tab.png');
     width: 22px * $gui-scale;
