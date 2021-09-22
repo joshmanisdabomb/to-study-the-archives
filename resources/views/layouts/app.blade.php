@@ -20,6 +20,10 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
+            <div id="gui-tooltip" class="mc-text">
+                <span id="gui-tooltip-text">Minecraft Tip</span>
+            </div>
+
             @include('layouts.navigation')
 
             <!-- Page Heading -->

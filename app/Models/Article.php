@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Handlers\Fragment\TextFragmentHandler;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class Article
@@ -20,7 +22,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null updated_at
  * @property \Carbon\Carbon|null deleted_at
  *
- * @property-read \App\Models\ArticleFragment[] sections
+ * @property-read \App\Models\ArticleSection[] sections
+ * @property-read \App\Models\ArticleRedirect[] redirects
+ *
+ * @property-read ?string excerpt
  */
 class Article extends Model
 {
@@ -36,6 +41,16 @@ class Article extends Model
 
     public function sections() {
         return $this->hasMany(ArticleSection::class)->orderBy('order');
+    }
+
+    public function redirects() {
+        return $this->hasMany(ArticleRedirect::class);
+    }
+
+    public function getExcerptAttribute() : ?string {
+        $fragment = $this->sections()->whereHas('fragments', function(Builder $query) { $query->where('type', '=', 'text'); })->get();
+        if (!$fragment) return null;
+        return strip_tags(TextFragmentHandler::getMarkup($fragment->flatMap(fn(ArticleSection $s) => $s->fragments)->first()->markup));
     }
 
 }

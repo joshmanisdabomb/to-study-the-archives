@@ -29,4 +29,6 @@ Route::get('/downloads', function() {
     ]);
 })->name('downloads');
 
+Route::get('/search', [ArticleController::class, 'search'])->name('search');
+
 //require __DIR__.'/auth.php';
