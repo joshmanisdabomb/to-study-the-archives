@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\Builder;
  *
  * @property-read \App\Models\ArticleSection[] sections
  * @property-read \App\Models\ArticleRedirect[] redirects
+ * @property-read \App\Models\ArticleTag[] tags
  *
  * @property-read ?string excerpt
  */
@@ -45,6 +46,10 @@ class Article extends Model
 
     public function redirects() {
         return $this->hasMany(ArticleRedirect::class);
+    }
+
+    public function tags() {
+        return $this->hasMany(ArticleTag::class);
     }
 
     public function getExcerptAttribute() : ?string {

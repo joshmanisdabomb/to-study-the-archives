@@ -8,6 +8,7 @@ use App\Models\ArticleFragment;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use RuntimeException;
+use Throwable;
 
 class TextFragmentHandler extends FragmentHandler {
 
