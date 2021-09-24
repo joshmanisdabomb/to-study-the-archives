@@ -39,7 +39,9 @@ $refiner-icons: 10;
 }
 
 .gui + .gui {
-    margin-top: 5px * $gui-scale;
+    @include gui() using ($gui-scale) {
+        margin-top: 5px * $gui-scale;
+    }
 }
 
 .gui-transparent {
@@ -53,8 +55,10 @@ $refiner-icons: 10;
 
 .gui-tab {
     background-image: url('/images/gui/tab.png');
-    width: 22px * $gui-scale;
-    height: 28px * $gui-scale;
+    @include gui() using ($gui-scale) {
+        width: 22px * $gui-scale;
+        height: 28px * $gui-scale;
+    }
     background-repeat: no-repeat;
     background-size: cover;
     image-rendering: pixelated;
@@ -65,32 +69,40 @@ $refiner-icons: 10;
 }
 
 .gui-border {
-    border-width: 4px * $gui-scale;
-    padding: 6px * $gui-scale;
     border-image-source: url('/images/gui/border.png');
     border-image-slice: 4 fill;
     border-image-repeat: repeat;
     image-rendering: pixelated;
     display: flex;
     flex-direction: column;
-    gap: 4px * $gui-scale;
+    @include gui() using ($gui-scale) {
+        border-width: 4px * $gui-scale;
+        padding: 6px * $gui-scale;
+        gap: 4px * $gui-scale;
+    }
 }
 
 .gui-tab + .gui-border {
     position: relative;
-    left: -4px * $gui-scale;
+    @include gui() using ($gui-scale) {
+        left: -4px * $gui-scale;
+    }
 }
 
 .gui-recipe {
     display: flex;
     align-items: center;
-    column-gap: 4px * $gui-scale;
+    @include gui() using ($gui-scale) {
+        column-gap: 4px * $gui-scale;
+    }
 }
 
 .gui-slot {
-    width: 18px * $gui-scale;
-    height: 18px * $gui-scale;
     image-rendering: pixelated;
+    @include gui() using ($gui-scale) {
+        width: 18px * $gui-scale;
+        height: 18px * $gui-scale;
+    }
 }
 
 .gui-slot-back {
@@ -100,40 +112,51 @@ $refiner-icons: 10;
 }
 
 .gui-arrow {
-    width: 22px * $gui-scale;
+    flex-shrink: 0;
+    @include gui() using ($gui-scale) {
+        width: 22px * $gui-scale;
+    }
 }
 
 .gui-power {
-    width: 10px * $gui-scale;
+    @include gui() using ($gui-scale) {
+        width: 10px * $gui-scale;
+    }
 }
 
 .gui-time {
-    width: 12px * $gui-scale;
+    @include gui() using ($gui-scale) {
+        width: 12px * $gui-scale;
+    }
 }
 
 .gui-large-slot {
-    width: 18px * $gui-scale;
-    height: 18px * $gui-scale;
-    border-width: 3px * $gui-scale;
     border-image-source: url('/images/gui/slot.png');
     border-image-slice: 3 fill;
     border-image-repeat: repeat;
     image-rendering: pixelated;
     box-sizing: content-box;
+    @include gui() using ($gui-scale) {
+        width: 18px * $gui-scale;
+        height: 18px * $gui-scale;
+        border-width: 3px * $gui-scale;
+    }
 }
 
 .gui-stack-count {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    width: 18px * $gui-scale;
-    height: 18px * $gui-scale;
     position: relative;
-    bottom: (17px * $gui-scale) - 1.1px;
     left: 1px;
     text-align: right;
-    padding: 1.25px * $gui-scale;
     pointer-events: none;
+    @include gui() using ($gui-scale) {
+        width: 18px * $gui-scale;
+        height: 18px * $gui-scale;
+        bottom: (17px * $gui-scale) - 1.1px;
+        padding: 1.25px * $gui-scale;
+    }
 }
 
 .gui-stacks {
@@ -143,18 +166,24 @@ $refiner-icons: 10;
 
 .gui-recipe-stats {
     display: flex;
-    gap: 6px * $gui-scale;
+    @include gui() using ($gui-scale) {
+        gap: 6px * $gui-scale;
+    }
 }
 
 .gui-recipe-stats > div {
     display: flex;
     align-items: center;
-    gap: 3px * $gui-scale;
+    @include gui() using ($gui-scale) {
+        gap: 3px * $gui-scale;
+    }
 }
 
 .gui-refiner-icon {
-    width: 14px * $gui-scale;
-    height: 14px * $gui-scale;
+    @include gui() using ($gui-scale) {
+        width: 14px * $gui-scale;
+        height: 14px * $gui-scale;
+    }
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -162,7 +191,9 @@ $refiner-icons: 10;
 @for $i from 0 to $refiner-icons {
     .gui-refiner-icon-#{$i} {
         background-image: url('/images/gui/refiner.png');
-        background-position-y: 14px * $gui-scale * -$i;
+        @include gui() using ($gui-scale) {
+            background-position-y: 14px * $gui-scale * -$i;
+        }
     }
 }
 
@@ -186,12 +217,14 @@ img.gui-ingredient {
 
 .mc-text {
     font-family: Minecraft,"WenQuanYi Bitmap Song",SimSun,Unifont,NISC18030,Beijing,Courier,sans-serif;
-    font-size: 10px * $gui-scale;
-    line-height: 10px * $gui-scale;
-    word-spacing: 1px * $gui-scale;
     white-space: nowrap;
     color: #FFF;
-    text-shadow: (1px * $gui-scale) (1px * $gui-scale) 0 #3F3F3F;
+    @include gui() using ($gui-scale) {
+        font-size: 10px * $gui-scale;
+        line-height: 10px * $gui-scale;
+        word-spacing: 1px * $gui-scale;
+        text-shadow: (1px * $gui-scale) (1px * $gui-scale) 0 #3F3F3F;
+    }
 }
 
 #gui-tooltip::before {
@@ -201,7 +234,7 @@ img.gui-ingredient {
     right: -0.125em;
     bottom: 0.125em;
     left: -0.125em;
-    border: 0.125em solid #100010;
+    border-width: 0.125em;
     border-style: none solid;
     border-color: rgba(16,0,16,0.94);
 }

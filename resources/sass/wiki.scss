@@ -23,7 +23,9 @@
 }
 
 .wiki-recipe-note {
-    padding: (4px * $gui-scale) 0;
+    @include gui() using ($gui-scale) {
+        padding: (4px * $gui-scale) 0;
+    }
 }
 
 #wiki-search {

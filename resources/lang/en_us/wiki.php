@@ -9,6 +9,7 @@ return [
     'navigation' => [
         'home' => 'Home',
         'downloads' => 'Downloads',
+        'random' => 'Random Page',
         'search' => 'Search :name...',
     ],
     'search' => [

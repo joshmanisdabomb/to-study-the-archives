@@ -48,4 +48,9 @@ class ArticleController extends Controller {
         ]);
     }
 
+    public function random() {
+        $article = Article::query()->inRandomOrder()->first();
+        return redirect()->route('article', ['slug1' => $article->slug1, 'slug2' => $article->slug2]);
+    }
+
 }

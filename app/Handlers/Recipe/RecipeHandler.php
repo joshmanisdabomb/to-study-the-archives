@@ -8,8 +8,6 @@ use Jenssegers\Model\Model;
 
 abstract class RecipeHandler {
 
-    const SLOT_WIDTH = (18 * 3) . 'px';
-
     public static function getHandlerForType(string $namespace, string $path) : string {
         return '\\App\\Handlers\\Recipe\\' . Str::studly($path) . 'RecipeHandler';
     }

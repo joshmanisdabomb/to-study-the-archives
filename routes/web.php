@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [WikiController::class, 'home'])->name('home');
 
 Route::get('/{slug1}/{slug2}', [ArticleController::class, 'view'])->where(['slug1', 'slug2'], '[a-zA-Z0-9_]+')->name('article');
+Route::get('/random', [ArticleController::class, 'random'])->name('random');
 
 Route::get('/downloads', function() {
     return view('downloads', [
