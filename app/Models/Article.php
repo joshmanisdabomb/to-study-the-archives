@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Builder;
  * @property-read \App\Models\ArticleRedirect[] redirects
  * @property-read \App\Models\ArticleTag[] tags
  *
+ * @property-read ?string image
  * @property-read ?string excerpt
  */
 class Article extends Model
@@ -50,6 +51,12 @@ class Article extends Model
 
     public function tags() {
         return $this->hasMany(ArticleTag::class);
+    }
+
+    public function getImageAttribute() : ?string {
+        if (!in_array($this->registry, ['minecraft:block', 'minecraft:item'])) return null;
+        $id = explode(':', $this->key, 2);
+        return asset('images/models/' . $id[0] . '/' . $id[1] . '.png');
     }
 
     public function getExcerptAttribute() : ?string {

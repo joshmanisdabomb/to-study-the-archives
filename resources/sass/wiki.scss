@@ -39,3 +39,12 @@
     background-size: cover;
     background-position-x: center;
 }
+
+.wiki-search-image {
+    min-width: 130px;
+    min-height: 130px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+}

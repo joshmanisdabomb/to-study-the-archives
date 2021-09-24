@@ -16,27 +16,29 @@
                         <h1 class="font-semibold text-2xl mb-2">{{ trans_choice('wiki.search.matches', count($matches)) }}</h1>
                     @endif
                     @foreach ($matches as $match)
-                        <div class="max-w-sm w-full lg:max-w-full mb-2">
-                            <a class="text-blue-500 hover:text-blue-800 visited:text-blue-600" href="{{ route('article', ['slug1' => $match->slug1, 'slug2' => $match->slug2]) }}">
-                                <div class="border border-gray-250 bg-white rounded p-4 flex flex-col justify-between leading-normal w-full">
-                                    <div class="font-bold text-xl mb-1">{{ $match->name }}</div>
-                                    <p class="text-gray-700 text-base">{{ $match->excerpt }}</p>
-                                </div>
-                            </a>
-                        </div>
+                        <a class="wiki-search-result max-w-sm w-full lg:max-w-full mb-4 border border-gray-300 bg-white rounded text-blue-500 hover:text-blue-800 visited:text-blue-600 flex" href="{{ route('article', ['slug1' => $match->slug1, 'slug2' => $match->slug2]) }}">
+                            @if ($match->image !== null)
+                                <div class="wiki-search-image bg-gray-200" style="background-image: url('{{ $match->image }}')"></div>
+                            @endif
+                            <div class="px-4 py-3 flex-grow flex flex-col leading-normal w-full border-gray-400 border-l-4">
+                                <div class="font-bold text-xl mb-1">{{ $match->name }}</div>
+                                <p class="text-gray-700 text-base">{{ $match->excerpt }}</p>
+                            </div>
+                        </a>
                     @endforeach
                     @if ($similars)
                         <h1 class="font-semibold text-2xl mb-2">{{ trans_choice('wiki.search.similar', count($similars)) }}</h1>
                     @endif
                     @foreach ($similars as $similar)
-                        <div class="max-w-sm w-full lg:max-w-full mb-2">
-                            <a class="text-blue-500 hover:text-blue-800 visited:text-blue-600" href="{{ route('article', ['slug1' => $similar->slug1, 'slug2' => $similar->slug2]) }}">
-                                <div class="border border-gray-250 bg-white rounded p-4 flex flex-col justify-between leading-normal w-full">
-                                    <div class="font-bold text-xl mb-1">{{ $similar->name }}</div>
-                                    <p class="text-gray-700 text-base">{{ $similar->excerpt }}</p>
-                                </div>
-                            </a>
-                        </div>
+                        <a class="wiki-search-result max-w-sm w-full lg:max-w-full mb-4 border border-gray-300 bg-white rounded text-blue-500 hover:text-blue-800 visited:text-blue-600 flex" href="{{ route('article', ['slug1' => $similar->slug1, 'slug2' => $similar->slug2]) }}">
+                            @if ($similar->image !== null)
+                                <div class="wiki-search-image bg-gray-200" style="background-image: url('{{ $similar->image }}')"></div>
+                            @endif
+                            <div class="px-4 py-3 flex-grow flex flex-col leading-normal w-full border-gray-400 border-l-4">
+                                <div class="font-bold text-xl mb-1">{{ $similar->name }}</div>
+                                <p class="text-gray-700 text-base">{{ $similar->excerpt }}</p>
+                            </div>
+                        </a>
                     @endforeach
                 </div>
             </div>

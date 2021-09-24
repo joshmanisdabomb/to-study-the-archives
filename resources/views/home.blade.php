@@ -23,7 +23,7 @@
 
                     <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1">
                         <div class="">
-                            <div class="text-2xl font-bold">
+                            <div class="text-2xl font-bold mb-2">
                                 <i class="fas fa-tags fa-fw"></i>
                                 Tags
                             </div>
@@ -34,7 +34,7 @@
                             </div>
                         </div>
                         <div class="">
-                            <div class="text-2xl font-bold">
+                            <div class="text-2xl font-bold mb-2">
                                 <i class="fas fa-layer-group fa-fw"></i>
                                 Categories
                             </div>
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="">
-                            <div class="text-2xl font-bold">
+                            <div class="text-2xl font-bold mb-2">
                                 <i class="fas fa-fire fa-fw"></i>
                                 Popular Pages
                             </div>
@@ -59,7 +59,7 @@
                             </div>
                         </div>
                         <div class="">
-                            <div class="text-2xl font-bold">
+                            <div class="text-2xl font-bold mb-2">
                                 <i class="fas fa-book fa-fw"></i>
                                 Guides
                             </div>
