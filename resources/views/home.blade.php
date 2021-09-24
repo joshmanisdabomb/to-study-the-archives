@@ -12,7 +12,7 @@
                 <div class="p-6 bg-white border-b border-gray-200 text-center">
                     <h1 class="text-2xl mt-6 mb-12">Welcome to the Loosely Connected Concepts Wiki, serving {{ $articles }} pages.</h1>
 
-                    <div class="grid md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-x-2 mb-12">
+                    <div class="grid md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-x-2">
                         @foreach (['Wasteland', 'Power', 'Nuclear', 'Materials', 'Nostalgic'] as $card)
                             <a href="{{ route("article", ['slug1' => 'concept', 'slug2' => strtolower($card)]) }}" class="overflow-hidden wiki-card text-blue-500 hover:text-blue-800 visited:text-blue-600">
                                 <div class="rounded w-full wiki-card-img" style="background-image: url('/images/cards/{{ strtolower($card) }}.png');"></div>
@@ -20,6 +20,8 @@
                             </a>
                         @endforeach
                     </div>
+
+                    <h2 class="text-lg my-12">The current version of the mod is <a class="text-blue-500 hover:text-blue-800 visited:text-blue-600" href="{{ route('article', ['slug1' => 'versions', 'slug2' => $current->code]) }}">LCC {{ $current->mod_version }}</a>, which can be downloaded <a class="text-blue-500 hover:text-blue-800 visited:text-blue-600" href="{{ $current->bitbucketDownload }}">here</a>.</h2>
 
                     <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1">
                         <div class="">
