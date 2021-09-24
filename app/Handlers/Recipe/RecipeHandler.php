@@ -23,7 +23,7 @@ abstract class RecipeHandler {
 
     public static abstract function getTabMarkup(array $fragment) : ?string;
 
-    public static function getShapedIngredients(array $pattern, array $key, ?int $padWidth, ?int $padHeight, array $translations = [], array $links = []) : array {
+    public static function getShapedIngredients(array $pattern, array $key, ?int $padWidth, ?int $padHeight, array $tags = [], array $translations = [], array $links = []) : array {
         $grid = [];
         foreach ($pattern as $row) {
             $gr = [];
@@ -34,9 +34,9 @@ abstract class RecipeHandler {
                 $grid += $gr;
             } else {
                 $gr = array_pad($gr, $padWidth, null);
-                $gr = array_map(function (?array $ing) use ($translations, $links) {
+                $gr = array_map(function (?array $ing) use ($translations, $links, $tags) {
                     if (!$ing) return null;
-                    return (Ingredient::fromArray($ing))->setNameFrom($translations)->setLinkFrom($links);
+                    return (Ingredient::fromArray($ing))->setTagFrom($tags)->setNameFrom($translations)->setLinkFrom($links);
                 }, $gr);
                 $grid[] = $gr;
             }
@@ -45,8 +45,8 @@ abstract class RecipeHandler {
         return array_pad($grid, $padHeight, array_fill(0, $padWidth, null));
     }
 
-    public static function getShapelessIngredients(array $ingredients, ?int $padWidth, ?int $padHeight, array $translations = [], array $links = []) : array {
-        $list = collect($ingredients)->map(fn(array $ing) => (Ingredient::fromArray($ing))->setNameFrom($translations)->setLinkFrom($links))->all();
+    public static function getShapelessIngredients(array $ingredients, ?int $padWidth, ?int $padHeight, array $tags = [], array $translations = [], array $links = []) : array {
+        $list = collect($ingredients)->map(fn(array $ing) => (Ingredient::fromArray($ing))->setTagFrom($tags)->setNameFrom($translations)->setLinkFrom($links))->all();
         if ($padWidth == null && $padHeight == null) return $list;
         $grid = [];
         for ($i = 0; $i < $padHeight; $i++) {
@@ -55,8 +55,8 @@ abstract class RecipeHandler {
         return $grid;
     }
 
-    public static function getShapelessIngredientsFlat(array $ingredients, ?int $padWidth, ?int $padHeight, array $translations = [], array $links = []) : array {
-        $ingredients = static::getShapelessIngredients($ingredients, null, null, $translations, $links);
+    public static function getShapelessIngredientsFlat(array $ingredients, ?int $padWidth, ?int $padHeight, array $tags = [], array $translations = [], array $links = []) : array {
+        $ingredients = static::getShapelessIngredients($ingredients, null, null, $tags, $translations, $links);
         $list = collect($ingredients)->flatMap(fn(Ingredient $ing) => array_fill(0, $ing->count ?: 1, $ing))->all();
         if ($padWidth == null && $padHeight == null) return $list;
         $grid = [];

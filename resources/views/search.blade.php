@@ -16,7 +16,7 @@
                         <h1 class="font-semibold text-2xl mb-2">{{ trans_choice('wiki.search.matches', count($matches)) }}</h1>
                     @endif
                     @foreach ($matches as $match)
-                        <a class="wiki-search-result max-w-sm w-full lg:max-w-full mb-4 border border-gray-300 bg-white rounded text-blue-500 hover:text-blue-800 visited:text-blue-600 flex" href="{{ route('article', ['slug1' => $match->slug1, 'slug2' => $match->slug2]) }}">
+                        <a class="wiki-search-result max-w-sm w-full lg:max-w-full mb-4 border border-gray-300 bg-white rounded text-indigo-500 hover:text-indigo-800 visited:text-indigo-600 flex" href="{{ route('article', ['slug1' => $match->slug1, 'slug2' => $match->slug2]) }}">
                             @if ($match->image !== null)
                                 <div class="wiki-search-image bg-gray-200" style="background-image: url('{{ $match->image }}')"></div>
                             @endif
@@ -30,7 +30,7 @@
                         <h1 class="font-semibold text-2xl mb-2">{{ trans_choice('wiki.search.similar', count($similars)) }}</h1>
                     @endif
                     @foreach ($similars as $similar)
-                        <a class="wiki-search-result max-w-sm w-full lg:max-w-full mb-4 border border-gray-300 bg-white rounded text-blue-500 hover:text-blue-800 visited:text-blue-600 flex" href="{{ route('article', ['slug1' => $similar->slug1, 'slug2' => $similar->slug2]) }}">
+                        <a class="wiki-search-result max-w-sm w-full lg:max-w-full mb-4 border border-gray-300 bg-white rounded text-indigo-500 hover:text-indigo-800 visited:text-indigo-600 flex" href="{{ route('article', ['slug1' => $similar->slug1, 'slug2' => $similar->slug2]) }}">
                             @if ($similar->image !== null)
                                 <div class="wiki-search-image bg-gray-200" style="background-image: url('{{ $similar->image }}')"></div>
                             @endif

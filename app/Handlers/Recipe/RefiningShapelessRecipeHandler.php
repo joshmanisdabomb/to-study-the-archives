@@ -7,11 +7,11 @@ use App\Models\Ingredient;
 class RefiningShapelessRecipeHandler extends RefiningRecipeHandler {
 
     protected static function getIngredientGrid(array $recipe) : array {
-        return static::getShapelessIngredients($recipe['ingredients'], static::getInputGridWidth($recipe), static::getInputGridHeight($recipe), $recipe['translations'], $recipe['links']);
+        return static::getShapelessIngredients($recipe['ingredients'], static::getInputGridWidth($recipe), static::getInputGridHeight($recipe), $recipe['tags'], $recipe['translations'], $recipe['links']);
     }
 
     protected static function getIngredientResults(array $recipe) : array {
-        return static::getShapelessIngredients($recipe['results'], static::getInputGridWidth($recipe), static::getInputGridHeight($recipe), $recipe['translations'], $recipe['links']);
+        return static::getShapelessIngredients($recipe['results'], static::getInputGridWidth($recipe), static::getInputGridHeight($recipe), $recipe['tags'], $recipe['translations'], $recipe['links']);
     }
 
     protected static function getInputGridWidth(array $recipe) : int {

@@ -31,6 +31,13 @@ class Ingredient extends Model {
         return $this->translation ?: $id;
     }
 
+    public function setTagFrom(array $tags) : Ingredient {
+        if (!$this->item && $this->tag) {
+            return new MultiIngredient(collect($tags[$this->tag])->map(fn($ing) => Ingredient::fromArray(array_replace($this->attributesToArray(), $ing)))->all());
+        }
+        return $this;
+    }
+
     public function setNameFrom(array $translations) : Ingredient {
         if ($this->item) {
             $this->translation = $translations[$this->item][App::currentLocale()] ?? $translations[$this->item][Config::get('fallback_locale')] ?? $this->id;

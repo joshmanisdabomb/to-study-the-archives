@@ -6,10 +6,10 @@ use App\Models\Ingredient;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 
-class CraftingShapedRecipeHandler extends GridRecipeHandler {
+class CraftingShapelessRecipeHandler extends GridRecipeHandler {
 
     protected static function getIngredientGrid(array $recipe) : array {
-        return static::getShapedIngredients($recipe['pattern'], $recipe['key'], static::getGridWidth($recipe), static::getGridHeight($recipe), $recipe['tags'], $recipe['translations'], $recipe['links']);
+        return static::getShapelessIngredients($recipe['ingredients'], static::getGridWidth($recipe), static::getGridHeight($recipe), $recipe['tags'], $recipe['translations'], $recipe['links']);
     }
 
     protected static function getIngredientResult(array $recipe) : Ingredient {
@@ -25,7 +25,7 @@ class CraftingShapedRecipeHandler extends GridRecipeHandler {
     }
 
     public static function getTabMarkup(array $fragment) : ?string {
-        return RecipeHandler::renderSlot(Ingredient::fromArray(['item' => 'minecraft:crafting_table', 'translation' => __("wiki.recipe." . CraftingShapedRecipeHandler::type())]), 'gui-slot');
+        return RecipeHandler::renderSlot(Ingredient::fromArray(['item' => 'minecraft:crafting_table', 'translation' => __("wiki.recipe." . CraftingShapelessRecipeHandler::type())]), 'gui-slot');
     }
 
 }
