@@ -23,7 +23,7 @@ class RecipeFragmentHandler extends FragmentHandler {
                 $tab = $handler::getTabMarkup($recipe);
                 $tab = $tab ? ('<div class="gui-tab">' . $tab . '</div>') : '';
                 $markup = $handler::getMarkup($recipe);
-                $content .= '<div class="gui' . (($fragment['obsolete'] ?? false) ? ' gui-transparent' : '') . ' md:justify-start justify-center">' . $tab . '<div class="gui-border">' . $markup . '</div>';
+                $content .= '<div class="gui' . (($fragment['obsolete'] ?? false) ? ' gui-transparent' : '') . ' md:justify-start justify-center items-center flex-wrap md:flex-nowrap"><div class="flex">' . $tab . '<div class="gui-border w-max">' . $markup . '</div></div>';
                 $note = $fragment['note'] ?? null;
                 if ($note) {
                     $handler = FragmentHandler::getHandlerForType($note['fragment']);
