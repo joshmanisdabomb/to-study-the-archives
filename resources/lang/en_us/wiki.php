@@ -22,6 +22,8 @@ return [
         'crafting_shapeless' => 'Shapeless Crafting Recipe',
         'refining_shaped' => 'Shaped Refining Recipe',
         'refining_shapeless' => 'Shapeless Refining Recipe',
+        'smelting' => 'Smelting Recipe',
+        'stonecutting' => 'Stonecutting Recipe',
         'time_rift' => 'Time Rift Recipe',
     ],
     'loot' => [

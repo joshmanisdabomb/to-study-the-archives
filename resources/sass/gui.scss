@@ -130,6 +130,18 @@ $refiner-icons: 10;
     }
 }
 
+.gui-smelt {
+    @include gui() using ($gui-scale) {
+        width: 18px * $gui-scale;
+    }
+}
+
+.gui-experience {
+    @include gui() using ($gui-scale) {
+        width: 9px * $gui-scale;
+    }
+}
+
 .gui-large-slot {
     border-image-source: url('/images/gui/slot.png');
     border-image-slice: 3 fill;
@@ -249,6 +261,25 @@ img.gui-ingredient {
         line-height: 10px * $gui-scale;
         word-spacing: 1px * $gui-scale;
         text-shadow: (1px * $gui-scale) (1px * $gui-scale) 0 #3F3F3F;
+    }
+}
+
+.mc-text-enchant {
+    background: linear-gradient(30deg, #c2a1ff 20%, #d4d6ff 50%, #c2a1ff 80%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: textShine 6s infinite linear;
+    @keyframes textShine {
+        to {
+            background-position: 200%;
+        }
+    }
+    text-shadow: none;
+    @include gui() using ($gui-scale) {
+        filter: drop-shadow((1px * $gui-scale) (1px * $gui-scale) 0 #401d54);
     }
 }
 
