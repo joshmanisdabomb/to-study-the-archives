@@ -12,6 +12,10 @@ class Ingredient extends Model {
 
     protected $fillable = ['item', 'tag', 'count', 'translation', 'link', 'vararg'];
 
+    public static function renderSlot(?Ingredient $inside, string $class = 'gui-slot gui-slot-back') : string {
+        return '<div class="' . $class . '">' . ($inside ? $inside->insideSlot() : '') . '</div>';
+    }
+
     public function getIdAttribute() : ?string {
         return $this->item;
     }
@@ -55,7 +59,10 @@ class Ingredient extends Model {
     public function insideSlot() : string {
         $content = '';
         if ($this->item) {
-            $content .= '<img class="gui-ingredient" src="' . asset('images/models/' . $this->namespace . '/' . $this->path . '.png') . '" alt="' . $this->name . '" data-mctooltip="' . $this->name . '">';
+            $block = 'images/models/' . $this->namespace . '/block/' . $this->path . '.png';
+            $item = 'images/models/' . $this->namespace . '/item/' . $this->path . '.png';
+            $asset = file_exists(public_path() . '/' . $block) ? $block : $item;
+            $content .= '<img class="gui-ingredient" src="' . asset($asset) . '" alt="' . $this->name . '" data-mctooltip="' . $this->name . '">';
         }
         if ($this->link) {
             $handler = LinkHandler::getHandlerForType($this->link['type']);

@@ -4,7 +4,6 @@ namespace App\Handlers\Recipe;
 
 use App\Models\Ingredient;
 use Illuminate\Support\Str;
-use Jenssegers\Model\Model;
 
 abstract class RecipeHandler {
 
@@ -62,10 +61,6 @@ abstract class RecipeHandler {
             $grid[] = array_pad(array_slice($list, $padWidth * $i, $padWidth, false), $padWidth, null);
         }
         return $grid;
-    }
-
-    public static function renderSlot(?Ingredient $inside, string $class = 'gui-slot gui-slot-back') : string {
-        return '<div class="' . $class . '">' . ($inside ? $inside->insideSlot() : '') . '</div>';
     }
 
 }

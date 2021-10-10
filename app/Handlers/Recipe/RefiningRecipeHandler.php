@@ -5,7 +5,6 @@ namespace App\Handlers\Recipe;
 use App\Models\Ingredient;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Str;
 
 abstract class RefiningRecipeHandler extends RecipeHandler {
 
@@ -24,14 +23,14 @@ abstract class RefiningRecipeHandler extends RecipeHandler {
     public static function getMarkup(array $recipe) : string {
         return '<div class="gui-recipe">
             <div class="grid" style="grid-template-columns: ' . implode(' ', array_fill(0, static::getInputGridWidth($recipe), '1fr')) . ';">
-                ' . collect(static::getIngredientGrid($recipe))->flatten(1)->map(fn(?Ingredient $ing) => static::renderSlot($ing))->implode('') . '
+                ' . collect(static::getIngredientGrid($recipe))->flatten(1)->map(fn(?Ingredient $ing) => Ingredient::renderSlot($ing))->implode('') . '
             </div>
             <div class="flex flex-col items-center gap-1">
                 <div data-mctooltip="' . static::getAction($recipe['translations']) . '" class="gui-refiner-icon gui-refiner-icon-' . static::getIconIndex($recipe) . '"></div>
                 <img class="gui-arrow" src="' . asset('images/gui/arrow.png') . '" alt="">
             </div>
             <div class="grid" style="grid-template-columns: ' . implode(' ', array_fill(0, static::getOutputGridWidth($recipe), '1fr')) . ';">
-                ' . collect(static::getIngredientResults($recipe))->flatten(1)->map(fn(?Ingredient $ing) => static::renderSlot($ing))->implode('') . '
+                ' . collect(static::getIngredientResults($recipe))->flatten(1)->map(fn(?Ingredient $ing) => Ingredient::renderSlot($ing))->implode('') . '
             </div>
         </div>
         <div class="gui-recipe-stats mc-text">

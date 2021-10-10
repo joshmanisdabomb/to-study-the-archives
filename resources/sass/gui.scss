@@ -201,6 +201,31 @@ img.gui-ingredient {
     image-rendering: high-quality;
 }
 
+.gui-loot-table {
+
+}
+
+.gui-loot-pool {
+
+}
+
+.gui-loot-entry {
+    display: flex;
+    align-items: center;
+    @include gui() using ($gui-scale) {
+        gap: 3px * $gui-scale;
+    }
+}
+
+.gui-loot-functions {
+    @include gui() using ($gui-scale) {
+        font-size: 8px * $gui-scale;
+        line-height: 8px * $gui-scale;
+        word-spacing: 0.8px * $gui-scale;
+        text-shadow: (0.8px * $gui-scale) (0.8px * $gui-scale) 0 #3F3F3F;
+    }
+}
+
 #gui-tooltip {
     position: fixed;
     top: 0;

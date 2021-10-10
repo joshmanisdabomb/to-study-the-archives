@@ -3,8 +3,6 @@
 namespace App\Handlers\Recipe;
 
 use App\Models\Ingredient;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Config;
 
 class CraftingShapelessRecipeHandler extends GridRecipeHandler {
 
@@ -25,7 +23,7 @@ class CraftingShapelessRecipeHandler extends GridRecipeHandler {
     }
 
     public static function getTabMarkup(array $fragment) : ?string {
-        return RecipeHandler::renderSlot(Ingredient::fromArray(['item' => 'minecraft:crafting_table', 'translation' => __("wiki.recipe." . CraftingShapelessRecipeHandler::type())]), 'gui-slot');
+        return Ingredient::renderSlot(Ingredient::fromArray(['item' => 'minecraft:crafting_table', 'translation' => __("wiki.recipe." . CraftingShapelessRecipeHandler::type())]), 'gui-slot');
     }
 
 }

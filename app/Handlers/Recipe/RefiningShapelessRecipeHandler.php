@@ -31,7 +31,7 @@ class RefiningShapelessRecipeHandler extends RefiningRecipeHandler {
     }
 
     public static function getTabMarkup(array $fragment) : ?string {
-        return RecipeHandler::renderSlot(Ingredient::fromArray(['item' => 'lcc:refiner', 'translation' => __("wiki.recipe." . RefiningShapelessRecipeHandler::type())]), 'gui-slot');
+        return Ingredient::renderSlot(Ingredient::fromArray(['item' => 'lcc:refiner', 'translation' => __("wiki.recipe." . RefiningShapelessRecipeHandler::type())]), 'gui-slot');
     }
 
 }

@@ -3,7 +3,6 @@
 namespace App\Handlers\Recipe;
 
 use App\Models\Ingredient;
-use Illuminate\Support\Str;
 
 class TimeRiftRecipeHandler extends RecipeHandler {
 
@@ -17,14 +16,14 @@ class TimeRiftRecipeHandler extends RecipeHandler {
 
     public static function getMarkup(array $recipe) : string {
         return '<div class="gui-recipe">
-            ' . static::renderSlot(static::getIngredientInput($recipe), 'gui-large-slot') . '
+            ' . Ingredient::renderSlot(static::getIngredientInput($recipe), 'gui-large-slot') . '
             <img class="gui-arrow" src="' . asset('images/gui/arrow.png') . '" alt="">
-            ' . static::renderSlot(static::getIngredientResult($recipe), 'gui-large-slot') . '
+            ' . Ingredient::renderSlot(static::getIngredientResult($recipe), 'gui-large-slot') . '
         </div>';
     }
 
     public static function getTabMarkup(array $fragment) : ?string {
-        return RecipeHandler::renderSlot(Ingredient::fromArray(['item' => 'lcc:time_rift', 'translation' => __("wiki.recipe." . TimeRiftRecipeHandler::type())]), 'gui-slot');
+        return Ingredient::renderSlot(Ingredient::fromArray(['item' => 'lcc:time_rift', 'translation' => __("wiki.recipe." . TimeRiftRecipeHandler::type())]), 'gui-slot');
     }
 
 }

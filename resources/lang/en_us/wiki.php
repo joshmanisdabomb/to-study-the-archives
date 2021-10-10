@@ -24,4 +24,8 @@ return [
         'refining_shapeless' => 'Shapeless Refining Recipe',
         'time_rift' => 'Time Rift Recipe',
     ],
+    'loot' => [
+        'entity' => 'Mob Drops',
+        'looting' => '+:range per Looting'
+    ]
 ];

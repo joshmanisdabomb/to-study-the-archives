@@ -6,6 +6,7 @@ use App\Handlers\Fragment\TextFragmentHandler;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\File;
 
 /**
  * Class Article
@@ -54,9 +55,11 @@ class Article extends Model
     }
 
     public function getImageAttribute() : ?string {
-        if (!in_array($this->registry, ['minecraft:block', 'minecraft:item'])) return null;
-        $id = explode(':', $this->key, 2);
-        return asset('images/models/' . $id[0] . '/' . $id[1] . '.png');
+        $registry = explode(':', $this->registry, 2);
+        $key = explode(':', $this->key, 2);
+        $path = 'images/models/' . $key[0] . '/' . $registry[1] . '/' . $key[1] . '.png';
+        if (!file_exists(public_path() . '/' . $path)) return null;
+        return asset($path);
     }
 
     public function getExcerptAttribute() : ?string {

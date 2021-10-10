@@ -8,7 +8,7 @@ use App\Models\ArticleRedirect;
 class ArticleController extends Controller {
 
     public function view(string $slug1, string $slug2) {
-        $article = Article::with(['sections', 'sections.fragments'])->where('slug1', $slug1)->where('slug2', $slug2)->first();
+        $article = Article::with(['sections', 'sections.fragments'])->where('slug1', $slug1)->where('slug2', $slug2)->whereNull('deleted_at')->first();
         if (!$article) {
             $redirect = ArticleRedirect::with(['article'])->where('slug1', $slug1)->where('slug2', $slug2)->firstOrFail();
             session()->flash('alert-yellow', 'Redirected from <span class="font-bold">/' . $slug1 . '/' . $slug2 . '</span>.');
@@ -26,10 +26,16 @@ class ArticleController extends Controller {
         $term = request('q');
         $chars = strlen($term);
 
-        $article = Article::where('name', '=', $term)->first();
+        $article = Article::where('name', '=', $term)->whereNull('deleted_at')->first();
         if ($article) return redirect()->route('article', ['slug1' => $article->slug1, 'slug2' => $article->slug2]);
 
-        $query = Article::with(['sections', 'sections.fragments'])->where('name', 'like', '%' . $term . '%');
+        $redirect = ArticleRedirect::where('name', '=', $term)->first();
+        if ($redirect) return redirect()->route('article', [
+            'slug1' => $redirect->article->slug1,
+            'slug2' => $redirect->article->slug2
+        ]);
+
+        $query = Article::with(['sections', 'sections.fragments'])->where('name', 'like', '%' . $term . '%')->whereNull('deleted_at');
         $matches = $query->get();
 
         $query = Article::with(['sections', 'sections.fragments'])->where(function($query) use ($term, $chars) {
@@ -39,6 +45,7 @@ class ArticleController extends Controller {
             }
         });
         $query->whereNotIn('id', $matches->pluck('id'));
+        $query->whereNull('deleted_at');
         $typos = $query->get();
 
         return view('search', [
@@ -49,7 +56,7 @@ class ArticleController extends Controller {
     }
 
     public function random() {
-        $article = Article::query()->inRandomOrder()->first();
+        $article = Article::query()->whereNull('deleted_at')->inRandomOrder()->first();
         return redirect()->route('article', ['slug1' => $article->slug1, 'slug2' => $article->slug2]);
     }
 
