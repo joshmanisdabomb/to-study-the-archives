@@ -19,4 +19,8 @@ class ColorFragmentHandler extends FragmentHandler {
         return '<div class="wiki-color"><div style="background-color: ' . $fragment['hex'] . '"></div>' . $fragment['hex'] . '<span class="wiki-separator">-</span>' . $fragment['red'] . ', ' . $fragment['green'] . ', ' . $fragment['blue'] . '<span class="wiki-separator">-</span>' . $fragment['int'] . '</div>';
     }
 
+    public static function getOuterMarkup(string $content, array $fragment) : string {
+        return '<div class="my-2">' . $content . '</div>';
+    }
+
 }

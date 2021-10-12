@@ -22,6 +22,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null deleted_at
  *
  * @property-read \App\Models\Article article
+ *
+ * @property-read string location
+ * @property-read ?string image
  */
 class ArticleRedirect extends Model
 {
@@ -37,6 +40,18 @@ class ArticleRedirect extends Model
 
     public function article() {
         return $this->belongsTo(Article::class);
+    }
+
+    public function getLocationAttribute() : string {
+        return $this->registry . '::' . $this->key;
+    }
+
+    public function getImageAttribute() : ?string {
+        $registry = explode(':', $this->registry, 2);
+        $key = explode(':', $this->key, 2);
+        $path = 'images/models/' . $key[0] . '/' . $registry[1] . '/' . $key[1] . '.png';
+        if (!file_exists(public_path() . '/' . $path)) return null;
+        return asset($path);
     }
 
 }

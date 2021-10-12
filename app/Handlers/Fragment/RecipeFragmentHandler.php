@@ -23,23 +23,10 @@ class RecipeFragmentHandler extends FragmentHandler {
                 $tab = $handler::getTabMarkup($recipe);
                 $tab = $tab ? ('<div class="gui-tab">' . $tab . '</div>') : '';
                 $markup = $handler::getMarkup($recipe);
-                $content .= '<div class="gui' . (($fragment['obsolete'] ?? false) ? ' gui-transparent' : '') . ' md:justify-start justify-center items-center flex-wrap md:flex-nowrap"><div class="flex">' . $tab . '<div class="gui-border w-max">' . $markup . '</div></div>';
+                $content .= '<div class="my-2 gui' . (($fragment['obsolete'] ?? false) ? ' gui-transparent' : '') . ' md:justify-start justify-center items-center flex-wrap md:flex-nowrap"><div class="flex">' . $tab . '<div class="gui-border w-max">' . $markup . '</div></div>';
                 $note = $fragment['note'] ?? null;
                 if ($note) {
-                    $handler = FragmentHandler::getHandlerForType($note['fragment']);
-                    if (class_exists($handler)) {
-                        $content .= '<p class="wiki-recipe-note">' . $handler::getMarkup($note) . '</p>';
-                    } else {
-                        $cloner = new VarCloner();
-                        $dumper = new HtmlDumper();
-
-                        $dumper->dump(
-                            $cloner->cloneVar($note),
-                            function ($line, $depth) use (&$content) {
-                                if ($depth >= 0) $content .= str_repeat('  ', $depth).$line."\n";
-                            }
-                        );
-                    }
+                    FragmentHandler::render($note, fn(string $content) => '<p class="wiki-recipe-note">' . $content . '</p>');
                 }
                 $content .= '</div>';
             } else {
@@ -55,6 +42,10 @@ class RecipeFragmentHandler extends FragmentHandler {
             }
         }
         return $content;
+    }
+
+    public static function getOuterMarkup(string $content, array $fragment) : string {
+        return '<div>' . $content . '</div>';
     }
 
 }

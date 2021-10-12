@@ -15,7 +15,7 @@ class LootFragmentHandler extends FragmentHandler {
             $tab = static::getTabMarkup($table);
             $tab = $tab ? ('<div class="gui-tab">' . $tab . '</div>') : '';
             $markup = static::getTableMarkup($table);
-            $content .= '<div class="gui' . (($fragment['obsolete'] ?? false) ? ' gui-transparent' : '') . ' md:justify-start justify-center items-center flex-wrap md:flex-nowrap"><div class="flex">' . $tab . '<div class="gui-border w-max">' . $markup . '</div></div>';
+            $content .= '<div class="my-2 gui' . (($fragment['obsolete'] ?? false) ? ' gui-transparent' : '') . ' md:justify-start justify-center items-center flex-wrap md:flex-nowrap"><div class="flex">' . $tab . '<div class="gui-border w-max">' . $markup . '</div></div>';
             $note = $fragment['note'] ?? null;
             if ($note) {
                 $handler = FragmentHandler::getHandlerForType($note['fragment']);
@@ -82,6 +82,10 @@ class LootFragmentHandler extends FragmentHandler {
 
     public static function getTabMarkup(array $fragment) : ?string {
         return Ingredient::renderSlot(Ingredient::fromArray(['item' => 'minecraft:iron_sword', 'translation' => __("wiki.loot." . request()->segment(1))]), 'gui-slot');
+    }
+
+    public static function getOuterMarkup(string $content, array $fragment) : string {
+        return '<div>' . $content . '</div>';
     }
 
 }

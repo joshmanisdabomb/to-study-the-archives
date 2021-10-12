@@ -18,6 +18,10 @@ class TextFragmentHandler extends FragmentHandler {
         return $content;
     }
 
+    public static function getOuterMarkup(string $content, array $fragment) : string {
+        return '<p class="mb-2">' . $content . '</p>';
+    }
+
     private static function getTextMarkup(array $text) : string {
         if (isset($text['text'])) $ret = $text['text'];
         else if (isset($text['translate'])) {

@@ -11,15 +11,11 @@
                 <x-alerts />
                 <div class="p-6 bg-white border-b border-gray-200">
                     @foreach ($article->sections as $section)
-                        <h1 class="font-semibold text-2xl pt-2">{{ $section->name }}</h1>
+                        <h1 class="font-semibold text-2xl">{{ $section->name }}</h1>
                         @foreach ($section->fragments as $fragment)
-                            <p class="pb-2">
-                                @if (class_exists($fragment->handler))
-                                    {!! ($fragment->handler)::getMarkup($fragment->markup) !!}
-                                @else
-                                    @php dump($fragment) @endphp
-                                @endif
-                            </p>
+                            {!! \App\Handlers\Fragment\FragmentHandler::render($fragment->markup, function(string $content, array $markup, string $class) {
+                                return $class::getOuterMarkup($content, $markup);
+                            }, $fragment) !!}
                         @endforeach
                     @endforeach
                 </div>

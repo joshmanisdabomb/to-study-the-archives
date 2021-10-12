@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\File;
  * @property-read \App\Models\ArticleRedirect[] redirects
  * @property-read \App\Models\ArticleTag[] tags
  *
+ * @property-read string location
  * @property-read ?string image
  * @property-read ?string excerpt
  */
@@ -52,6 +53,10 @@ class Article extends Model
 
     public function tags() {
         return $this->hasMany(ArticleTag::class);
+    }
+
+    public function getLocationAttribute() : string {
+        return $this->registry . '::' . $this->key;
     }
 
     public function getImageAttribute() : ?string {

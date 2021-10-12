@@ -38,12 +38,6 @@ $refiner-icons: 10;
     display: flex;
 }
 
-.gui + .gui {
-    @include gui() using ($gui-scale) {
-        margin-top: 5px * $gui-scale;
-    }
-}
-
 .gui-transparent {
     opacity: 0.5;
     transition: opacity 0.5s;
