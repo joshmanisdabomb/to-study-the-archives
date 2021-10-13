@@ -8,11 +8,17 @@
 .wiki-color {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px;
+    padding: 2px;
+    gap: 8px;
 }
 
-.wiki-color > div {
+.wiki-color-details {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.wiki-color-swatch {
     display: inline-block;
     background-image: url("/images/gui/swatch1.png"), url("/images/gui/swatch2.png");
     background-blend-mode: multiply, normal;
@@ -62,4 +68,19 @@
     background-position: center;
     background-repeat: no-repeat;
     image-rendering: pixelated;
+}
+
+.wiki-header-image img {
+    height: 126px;
+}
+
+header .gui-slot-back {
+    background-image: none;
+}
+
+header .wiki-color-details {
+    display: none;
+    @media (min-width: $small) {
+        display: block;
+    }
 }

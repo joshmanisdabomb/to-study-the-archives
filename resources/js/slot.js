@@ -11,4 +11,14 @@ setInterval(() => {
             }
         }
     });
+    document.querySelectorAll('.wiki-flick').forEach(e => {
+        const elements = e.querySelectorAll('.wiki-flick-entry');
+        if (elements.length > 0) {
+            const index = Array.from(elements).findIndex(e => e.style.display === "block");
+            if (index >= 0 && !elements[index].matches(':hover')) {
+                elements[index].style.display = "none";
+                elements[(index + 1) % elements.length].style.display = "block";
+            }
+        }
+    });
 }, 1000);

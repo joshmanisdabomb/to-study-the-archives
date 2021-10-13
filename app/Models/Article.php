@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\File;
  * @property \Carbon\Carbon|null deleted_at
  *
  * @property-read \App\Models\ArticleSection[] sections
+ * @property-read \App\Models\ArticleSection[] sectionsMain
+ * @property-read \App\Models\ArticleSection[] sectionsInfo
  * @property-read \App\Models\ArticleRedirect[] redirects
  * @property-read \App\Models\ArticleTag[] tags
  *

@@ -16,7 +16,7 @@ use Symfony\Component\VarDumper\VarDumper;
 class ColorFragmentHandler extends FragmentHandler {
 
     public static function getMarkup(array $fragment) : string {
-        return '<div class="wiki-color"><div style="background-color: ' . $fragment['hex'] . '"></div>' . $fragment['hex'] . '<span class="wiki-separator">-</span>' . $fragment['red'] . ', ' . $fragment['green'] . ', ' . $fragment['blue'] . '<span class="wiki-separator">-</span>' . $fragment['int'] . '</div>';
+        return '<div class="wiki-color"><div class="wiki-color-swatch" style="background-color: ' . $fragment['hex'] . '"></div><span class="wiki-color-details">' . $fragment['hex'] . '<span class="wiki-separator">-</span>' . $fragment['red'] . ', ' . $fragment['green'] . ', ' . $fragment['blue'] . '<span class="wiki-separator">-</span>' . $fragment['int'] . '</span></div>';
     }
 
     public static function getOuterMarkup(string $content, array $fragment) : string {

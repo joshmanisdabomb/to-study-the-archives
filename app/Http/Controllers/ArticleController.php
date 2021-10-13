@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Handlers\Fragment\FragmentHandler;
 use App\Models\Article;
 use App\Models\ArticleRedirect;
+use App\Models\ArticleSection;
 
 class ArticleController extends Controller {
 
@@ -17,8 +19,30 @@ class ArticleController extends Controller {
                 'slug2' => $redirect->article->slug2
             ]);
         }
+
+        //Read info from info table fragment.
+        $infos = $article->sections()->where('type', 'info')->get();
+        foreach ($infos as $section) {
+            $table = $section->fragments->firstWhere('markup.fragment', '=', 'table');
+            if ($table === null) continue;
+            $table = $table->markup;
+
+            $info = [];
+            foreach ($table['rows'] as $row) {
+                $key = collect($row['cells'][0]['fragments'])
+                    ->map(fn(array $fragment) => FragmentHandler::render($fragment, fn(string $content) => $content))
+                    ->join('');
+                $value = collect($row['cells'][1]['fragments'])
+                    ->map(fn(array $fragment) => FragmentHandler::render($fragment, fn(string $content) => '<div>' . $content . '</div>'))
+                    ->join('');
+                $info[$key] = $value;
+            }
+            break;
+        }
         return view('article', [
-            'article' => $article
+            'article' => $article,
+            'main' => $article->sections()->where('type', 'main')->get(),
+            'info' => $info ?? null
         ]);
     }
 
