@@ -69,6 +69,25 @@
                         @endforeach
                     @endforeach
                 </div>
+                <div class="p-6 bg-white border-b border-gray-200">
+                    @if ($article->tags)
+                        <div class="flex gap-1 items-center mb-1">
+                            <span>Tags: </span>
+                            <div class="flex flex-wrap gap-1">
+                                @foreach ($article->tags as $tag)
+                                    <a href="{{ route('tag', ['tag' => \Illuminate\Support\Str::snake(strtolower($tag->tag))]) }}" class="rounded-xl bg-blue-400 hover:bg-blue-600 visited:bg-blue-500 text-white py-0.5 px-2.5 flex items-center">
+                                        <div>{{ $tag->tag }}</div>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                    <div>
+                        <a href="{{ route('category', ['registry' => $article->slug1]) }}" class="underline text-blue-500 hover:text-blue-800 visited:text-blue-600">
+                            View all {{ str_replace('_', ' ', $article->slug1) }} articles.
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
