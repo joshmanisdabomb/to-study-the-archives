@@ -22,7 +22,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WikiController::class, 'home'])->name('home');
 
-Route::get('/{slug1}/{slug2}', [ArticleController::class, 'view'])->where(['slug1', 'slug2'], '[a-zA-Z0-9_]+')->name('article');
+Route::get('/tag/{tag}', [TagController::class, 'view'])->where(['tag'], '[a-zA-Z0-9_]+')->name('tag');
+Route::get('/category/{registry}', [CategoryController::class, 'view'])->where(['registry'], '[a-zA-Z0-9_]+')->name('category');
+
 Route::get('/random', [ArticleController::class, 'random'])->name('random');
 
 Route::get('/downloads', function() {
@@ -33,7 +35,6 @@ Route::get('/downloads', function() {
 
 Route::get('/search', [ArticleController::class, 'search'])->name('search');
 
-Route::get('/tag/{tag}', [TagController::class, 'view'])->where(['tag'], '[a-zA-Z0-9_]+')->name('tag');
-Route::get('/category/{registry}', [CategoryController::class, 'view'])->where(['registry'], '[a-zA-Z0-9_]+')->name('category');
+Route::get('/{slug1}/{slug2}', [ArticleController::class, 'view'])->where(['slug1', 'slug2'], '[a-zA-Z0-9_]+')->name('article');
 
 //require __DIR__.'/auth.php';

@@ -36,7 +36,22 @@ return [
             'item' => 'bi bi-star mr-1',
             'effectivity' => 'bi bi-shield-lock mr-1',
             'entity' => 'fas fa-paw mr-1',
-            'version' => 'bi bi-archive mr-1'
+            'version' => 'bi bi-archive mr-1',
+        ],
+        'category' => 'bi bi-collection mr-1',
+        'tag' => 'bi bi-tags mr-1',
+    ],
+    'category' => [
+        'matches' => '{1} :count article in this category:|[2,*] :count articles in this category:',
+        'name' => [
+            'block' => '{1} Block|[2,*] Blocks',
+            'item' => '{1} Item|[2,*] Items',
+            'entity' => '{1} Entity|[2,*] Entities',
+            'effectivity' => '{1} Effectivity|[2,*] Effectivies',
+            'version' => '{1} Version|[2,*] Versions',
         ]
-    ]
+    ],
+    'tag' => [
+        'matches' => '{1} :count article in this tag:|[2,*] :count articles in this tag:',
+    ],
 ];

@@ -10,7 +10,7 @@ use App\Models\ArticleSection;
 class ArticleController extends Controller {
 
     public function view(string $slug1, string $slug2) {
-        $article = Article::with(['sections', 'sections.fragments'])->where('slug1', $slug1)->where('slug2', $slug2)->whereNull('deleted_at')->first();
+        $article = Article::with(['sections', 'sections.fragments', 'tags'])->where('slug1', $slug1)->where('slug2', $slug2)->whereNull('deleted_at')->first();
         if (!$article) {
             $redirect = ArticleRedirect::with(['article'])->where('slug1', $slug1)->where('slug2', $slug2)->firstOrFail();
             session()->flash('alert-yellow', 'Redirected from <span class="font-bold">/' . $slug1 . '/' . $slug2 . '</span>.');

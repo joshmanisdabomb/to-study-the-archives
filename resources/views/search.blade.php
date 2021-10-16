@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h1 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('wiki.page.search', ['for' => $query]) }}
-        </h2>
+        </h1>
     </x-slot>
 
     <div class="py-8">
@@ -13,7 +13,7 @@
                     @if (!$matches && !$similars)
                         <p>{{ __('wiki.search.none') }}</p>
                     @elseif ($matches)
-                        <h1 class="font-semibold text-2xl mb-2">{{ trans_choice('wiki.search.matches', count($matches)) }}</h1>
+                        <h2 class="font-semibold text-2xl mb-2">{{ trans_choice('wiki.search.matches', count($matches)) }}</h2>
                     @endif
                     @foreach ($matches as $match)
                         <a class="wiki-search-result max-w-sm w-full lg:max-w-full mb-4 border border-gray-300 bg-white rounded text-indigo-500 hover:text-indigo-800 visited:text-indigo-600 flex" href="{{ route('article', ['slug1' => $match->slug1, 'slug2' => $match->slug2]) }}">
@@ -27,7 +27,7 @@
                         </a>
                     @endforeach
                     @if ($similars)
-                        <h1 class="font-semibold text-2xl mb-2">{{ trans_choice('wiki.search.similar', count($similars)) }}</h1>
+                        <h2 class="font-semibold text-2xl mb-2">{{ trans_choice('wiki.search.similar', count($similars)) }}</h2>
                     @endif
                     @foreach ($similars as $similar)
                         <a class="wiki-search-result max-w-sm w-full lg:max-w-full mb-4 border border-gray-300 bg-white rounded text-indigo-500 hover:text-indigo-800 visited:text-indigo-600 flex" href="{{ route('article', ['slug1' => $similar->slug1, 'slug2' => $similar->slug2]) }}">

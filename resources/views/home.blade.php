@@ -42,7 +42,7 @@
                             </div>
                             <div class="text-left">
                                 @foreach ($registries as $registry)
-                                    <p><a href="{{ route("category", ['registry' => $registry]) }}" class="underline text-blue-500 hover:text-blue-800 visited:text-blue-600">{{ ucwords(str_replace('_', ' ', $registry)) }}</a></p>
+                                    <p><a href="{{ route("category", ['registry' => $registry]) }}" class="underline text-blue-500 hover:text-blue-800 visited:text-blue-600">{{ trans_choice('wiki.category.name.' . $registry, 2) }}</a></p>
                                 @endforeach
                             </div>
                         </div>
