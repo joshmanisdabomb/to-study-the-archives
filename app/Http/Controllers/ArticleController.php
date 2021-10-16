@@ -9,6 +9,15 @@ use App\Models\ArticleSection;
 
 class ArticleController extends Controller {
 
+    public function list() {
+        $articles = Article::whereNull('deleted_at')->orderBy('name')->get();
+        return view('list', [
+            'articles' => $articles,
+            'title' => __('wiki.list.title'),
+            'matches' => 'all'
+        ]);
+    }
+
     public function view(string $slug1, string $slug2) {
         $article = Article::with(['sections', 'sections.fragments', 'tags'])->where('slug1', $slug1)->where('slug2', $slug2)->whereNull('deleted_at')->first();
         if (!$article) {

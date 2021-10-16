@@ -14,9 +14,11 @@ class CategoryController extends Controller {
         if ($articles->isEmpty()) {
             throw (new ModelNotFoundException)->setModel(Article::class);
         }
-        return view('category', [
-            'registry' => $registry,
-            'articles' => $articles
+        return view('list', [
+            'articles' => $articles,
+            'title' => trans_choice('wiki.category.name.' . $registry, 2),
+            'type' => 'category',
+            'matches' => 'category'
         ]);
     }
 

@@ -18,9 +18,11 @@ class TagController extends Controller {
         if ($articles->isEmpty()) {
             throw (new ModelNotFoundException)->setModel(Article::class);
         }
-        return view('tag', [
-            'tag' => $tag,
-            'articles' => $articles
+        return view('list', [
+            'articles' => $articles,
+            'title' => $tag,
+            'type' => 'tag',
+            'matches' => 'tag'
         ]);
     }
 

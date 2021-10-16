@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <x-alerts />
                 <div class="p-6 bg-white border-b border-gray-200 text-center">
-                    <h1 class="text-2xl mt-6 mb-12">Welcome to the Loosely Connected Concepts Wiki, serving {{ $articles }} pages.</h1>
+                    <h1 class="text-2xl mt-6 mb-12">Welcome to the Loosely Connected Concepts Wiki, serving <a class="underline text-blue-500 hover:text-blue-800 visited:text-blue-600" href="{{ route('all') }}">{{ $articles }} pages</a>.</h1>
 
                     <div class="grid md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-x-2">
                         @foreach (['Wasteland', 'Power', 'Nuclear', 'Materials', 'Nostalgic'] as $card)

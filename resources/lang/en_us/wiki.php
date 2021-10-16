@@ -11,6 +11,10 @@ return [
         'downloads' => 'Downloads',
         'random' => 'Random Page',
         'search' => 'Search :name...',
+        'block' => 'Blocks',
+        'item' => 'Items',
+        'entity' => 'Entities',
+        'version' => 'Versions',
     ],
     'search' => [
         'matches' => '{1} :count match found:|[2,*] :count matches found:',
@@ -42,7 +46,6 @@ return [
         'tag' => 'bi bi-tags mr-1',
     ],
     'category' => [
-        'matches' => '{1} :count article in this category:|[2,*] :count articles in this category:',
         'name' => [
             'block' => '{1} Block|[2,*] Blocks',
             'item' => '{1} Item|[2,*] Items',
@@ -51,7 +54,16 @@ return [
             'version' => '{1} Version|[2,*] Versions',
         ]
     ],
-    'tag' => [
-        'matches' => '{1} :count article in this tag:|[2,*] :count articles in this tag:',
+    'list' => [
+        'matches' => [
+            'all' => '{1} :count article on this wiki:|[2,*] :count articles in this wiki:',
+            'tag' => '{1} :count article in this tag:|[2,*] :count articles in this tag:',
+            'category' => '{1} :count article in this category:|[2,*] :count articles in this category:',
+        ],
+        'type' => [
+            'tag' => 'Article Tag',
+            'category' => 'Article Category',
+        ],
+        'title' => 'All Pages'
     ],
 ];

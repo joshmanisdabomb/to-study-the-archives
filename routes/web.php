@@ -35,6 +35,8 @@ Route::get('/downloads', function() {
 
 Route::get('/search', [ArticleController::class, 'search'])->name('search');
 
+Route::get('/all', [ArticleController::class, 'list'])->name('all');
+
 Route::get('/{slug1}/{slug2}', [ArticleController::class, 'view'])->where(['slug1', 'slug2'], '[a-zA-Z0-9_]+')->name('article');
 
 //require __DIR__.'/auth.php';

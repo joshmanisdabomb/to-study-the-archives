@@ -16,6 +16,18 @@
                         <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                             {{ __('wiki.navigation.home') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('category', ['registry' => 'block'])" :active="request()->routeIs('category') && request()->route('registry') == 'block'">
+                            {{ __('wiki.navigation.block') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('category', ['registry' => 'item'])" :active="request()->routeIs('category') && request()->route('registry') == 'item'">
+                            {{ __('wiki.navigation.item') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('category', ['registry' => 'entity'])" :active="request()->routeIs('category') && request()->route('registry') == 'entity'">
+                            {{ __('wiki.navigation.entity') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('category', ['registry' => 'version'])" :active="request()->routeIs('category') && request()->route('registry') == 'version'">
+                            {{ __('wiki.navigation.version') }}
+                        </x-nav-link>
                         <x-nav-link :href="route('downloads')" :active="request()->routeIs('downloads')">
                             {{ __('wiki.navigation.downloads') }}
                         </x-nav-link>
@@ -83,6 +95,18 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('wiki.navigation.home') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('category', ['registry' => 'block'])" :active="request()->routeIs('category') && request()->route('registry') == 'block'">
+                {{ __('wiki.navigation.block') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('category', ['registry' => 'item'])" :active="request()->routeIs('category') && request()->route('registry') == 'item'">
+                {{ __('wiki.navigation.item') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('category', ['registry' => 'entity'])" :active="request()->routeIs('category') && request()->route('registry') == 'entity'">
+                {{ __('wiki.navigation.entity') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('category', ['registry' => 'version'])" :active="request()->routeIs('category') && request()->route('registry') == 'version'">
+                {{ __('wiki.navigation.version') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('downloads')" :active="request()->routeIs('downloads')">
                 {{ __('wiki.navigation.downloads') }}
