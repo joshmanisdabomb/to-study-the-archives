@@ -29,5 +29,14 @@ return [
     'loot' => [
         'entity' => 'Mob Drops',
         'looting' => '+:range per Looting'
+    ],
+    'icons' => [
+        'registry' => [
+            'block' => 'bi bi-box mr-1',
+            'item' => 'bi bi-star mr-1',
+            'effectivity' => 'bi bi-shield-lock mr-1',
+            'entity' => 'fas fa-paw mr-1',
+            'version' => 'bi bi-archive mr-1'
+        ]
     ]
 ];

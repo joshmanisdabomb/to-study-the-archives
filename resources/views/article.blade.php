@@ -8,6 +8,7 @@
                 <h1 class="font-semibold font-bold text-4xl text-gray-800 leading-tight">
                     {{ $article->name }}
                 </h1>
+                <span class="text-gray-500"><i class="{!! __('wiki.icons.registry.' . $article->slug1) !!}"></i>{{ ucwords(str_replace('_', ' ', $article->slug1)) }}</span>
                 <aside>
                     <div>
                         @foreach ($main as $section)
