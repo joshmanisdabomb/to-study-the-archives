@@ -16,7 +16,7 @@ abstract class GridRecipeHandler extends RecipeHandler {
 
     public static function getMarkup(array $recipe) : string {
         return '<div class="gui-recipe">
-            <div class="grid" style="grid-template-columns: ' . implode(' ', array_fill(0, static::getGridHeight($recipe), '1fr')) . ';">
+            <div class="grid" style="grid-template-columns: ' . implode(' ', array_fill(0, static::getGridWidth($recipe), '1fr')) . ';">
                 ' . collect(static::getIngredientGrid($recipe))->flatten(1)->map(fn(?Ingredient $ing) => Ingredient::renderSlot($ing))->implode('') . '
             </div>
             <img class="gui-arrow" src="' . asset('images/gui/arrow.png') . '" alt="">

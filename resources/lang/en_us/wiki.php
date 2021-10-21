@@ -29,6 +29,8 @@ return [
         'smelting' => 'Smelting Recipe',
         'stonecutting' => 'Stonecutting Recipe',
         'time_rift' => 'Time Rift Recipe',
+        'spawner_table_shaped' => 'Shaped Arcane Table Recipe',
+        'spawner_table_shapeless' => 'Shapeless Arcane Table Recipe',
     ],
     'loot' => [
         'entity' => 'Mob Drops',
