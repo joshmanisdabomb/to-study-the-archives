@@ -223,8 +223,11 @@ img.gui-ingredient {
     }
 }
 
-.gui-loot-functions {
+.gui-loot-modifiers {
+    display: flex;
+    flex-direction: column;
     @include gui() using ($gui-scale) {
+        row-gap: 1px * $gui-scale;
         font-size: 8px * $gui-scale;
         line-height: 8px * $gui-scale;
         word-spacing: 0.8px * $gui-scale;

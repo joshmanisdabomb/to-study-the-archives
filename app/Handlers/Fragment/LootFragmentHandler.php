@@ -9,32 +9,37 @@ use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 class LootFragmentHandler extends FragmentHandler {
 
     public static function getMarkup(array $fragment) : string {
-        if (count($fragment['tables']) < 1) return 'No recipes.';
+        if (count($fragment['tables']) < 1) return 'No loot tables.';
         $content = '';
-        foreach ($fragment['tables'] as $table) {
-            $tab = static::getTabMarkup($table);
-            $tab = $tab ? ('<div class="gui-tab">' . $tab . '</div>') : '';
-            $markup = static::getTableMarkup($table);
-            $content .= '<div class="my-2 gui' . (($fragment['obsolete'] ?? false) ? ' gui-transparent' : '') . ' md:justify-start justify-center items-center flex-wrap md:flex-nowrap"><div class="flex">' . $tab . '<div class="gui-border w-max">' . $markup . '</div></div>';
-            $note = $fragment['note'] ?? null;
-            if ($note) {
-                $handler = FragmentHandler::getHandlerForType($note['fragment']);
-                if (class_exists($handler)) {
-                    $content .= '<p class="wiki-recipe-note">' . $handler::getMarkup($note) . '</p>';
-                } else {
-                    $cloner = new VarCloner();
-                    $dumper = new HtmlDumper();
 
-                    $dumper->dump(
-                        $cloner->cloneVar($note),
-                        function ($line, $depth) use (&$content) {
-                            if ($depth >= 0) $content .= str_repeat('  ', $depth).$line."\n";
-                        }
-                    );
-                }
-            }
-            $content .= '</div>';
+        $tab = static::getTabMarkup($fragment);
+        $tab = $tab ? ('<div class="gui-tab">' . $tab . '</div>') : '';
+        $content .= '<div class="my-2 gui' . (($fragment['obsolete'] ?? false) ? ' gui-transparent' : '') . ' md:justify-start justify-center items-center flex-wrap md:flex-nowrap"><div class="flex">' . $tab . '<div class="gui-border w-max">';
+        foreach ($fragment['tables'] as $table) {
+            $markup = static::getTableMarkup($table);
+            $content .= $markup;
         }
+        $content .= '</div></div>';
+
+        $note = $fragment['note'] ?? null;
+        if ($note) {
+            $handler = FragmentHandler::getHandlerForType($note['fragment']);
+            if (class_exists($handler)) {
+                $content .= '<p class="wiki-recipe-note">' . $handler::getMarkup($note) . '</p>';
+            } else {
+                $cloner = new VarCloner();
+                $dumper = new HtmlDumper();
+
+                $dumper->dump(
+                    $cloner->cloneVar($note),
+                    function ($line, $depth) use (&$content) {
+                        if ($depth >= 0) $content .= str_repeat('  ', $depth).$line."\n";
+                    }
+                );
+            }
+        }
+
+        $content .= '</div>';
         return $content;
     }
 
@@ -47,31 +52,50 @@ class LootFragmentHandler extends FragmentHandler {
     public static function getPoolMarkup(array $pool, array $translations, array $links) : string {
         $content = '';
         foreach ($pool['entries'] as $entry) {
-            $functions = ['count' => ['min' => 1, 'max' => 1]];
+            $modifiers = ['count' => ['min' => 1, 'max' => 1]];
+            $conditions = $entry['conditions'] ?? [];
+            $functions = $entry['functions'] ?? [];
 
-            foreach ($entry['functions'] as $function) {
+            foreach ($functions as $function) {
                 if ($function['function'] === 'minecraft:set_count') {
                     if ($function['add']) {
-                        $functions['count']['min'] += $function['count']['min'];
-                        $functions['count']['max'] += $function['count']['max'];
+                        $modifiers['count']['min'] += $function['count']['min'];
+                        $modifiers['count']['max'] += $function['count']['max'];
                     } else {
-                        $functions['count']['min'] = $function['count']['min'];
-                        $functions['count']['max'] = $function['count']['max'];
+                        $modifiers['count']['min'] = $function['count']['min'];
+                        $modifiers['count']['max'] = $function['count']['max'];
                     }
                 } elseif ($function['function'] === 'minecraft:looting_enchant') {
-                    $functions['looting'] = $functions['looting'] ?? [];
-                    $functions['looting']['min'] = $function['count']['min'];
-                    $functions['looting']['max'] = $function['count']['max'];
+                    $modifiers['count']['looting'] = $modifiers['count']['looting'] ?? [];
+                    $modifiers['count']['looting']['min'] = $function['count']['min'];
+                    $modifiers['count']['looting']['max'] = $function['count']['max'];
+                }
+            }
+            foreach ($conditions as $condition) {
+                if ($condition['condition'] === 'minecraft:killed_by_player') {
+                    $modifiers['player'] = true;
+                } elseif ($condition['condition'] === 'minecraft:random_chance_with_looting') {
+                    $modifiers['chance'] = ['of' => $condition['chance'], 'looting' => $condition['looting_multiplier'] ?? 0];
                 }
             }
 
             $content .= '<div class="gui-loot-entry mc-text">';
             $content .= Ingredient::renderSlot(Ingredient::fromArray(['item' => $entry['name']])->setNameFrom($translations)->setLinkFrom($links));
 
-            $content .= '<div class="gui-loot-functions">';
-            $content .= '<p>' . (($functions['count']['min'] != $functions['count']['max']) ? ($functions['count']['min'] . '-' . $functions['count']['max']) : $functions['count']['min']) . '</p>';
-            if ($functions['looting']) {
-                $content .= '<p class="mc-text-enchant">' . __('wiki.loot.looting', ['range' => (($functions['looting']['min'] != $functions['looting']['max']) ? ($functions['looting']['min'] . '-' . $functions['looting']['max']) : $functions['looting']['min'])]) . '</p>';
+            $content .= '<div class="gui-loot-modifiers">';
+            if (!isset($modifiers['chance']) || $modifiers['count']['min'] != 1 || $modifiers['count']['max'] != 1) {
+                $content .= '<p>' . (($modifiers['count']['min'] != $modifiers['count']['max']) ? ($modifiers['count']['min'] . '-' . $modifiers['count']['max']) : $modifiers['count']['min']) . '</p>';
+            } else {
+                $content .= '<p>' . __('wiki.loot.chance', ['percent' => $modifiers['chance']['of'] * 100]) . '</p>';
+            }
+            if (isset($modifiers['count']['looting'])) {
+                $content .= '<p class="mc-text-enchant">' . __('wiki.loot.looting', ['amount' => (($modifiers['count']['looting']['min'] != $modifiers['count']['looting']['max']) ? ($modifiers['count']['looting']['min'] . '-' . $modifiers['count']['looting']['max']) : $modifiers['count']['looting']['min'])]) . '</p>';
+            }
+            if (isset($modifiers['chance']['looting'])) {
+                $content .= '<p class="mc-text-enchant">' . __('wiki.loot.looting', ['amount' => __('wiki.loot.chance', ['percent' => $modifiers['chance']['looting'] * 100])]) . '</p>';
+            }
+            if ($modifiers['player'] ?? null) {
+                $content .= '<p>' . __('wiki.loot.player_kill') . '</p>';
             }
             $content .= '</div>';
 

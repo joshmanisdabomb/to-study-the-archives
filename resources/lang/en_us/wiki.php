@@ -34,7 +34,9 @@ return [
     ],
     'loot' => [
         'entity' => 'Mob Drops',
-        'looting' => '+:range per Looting'
+        'player_kill' => 'On Player Kill Only',
+        'looting' => '+:amount per Looting',
+        'chance' => ':percent% Drop Chance'
     ],
     'icons' => [
         'registry' => [
@@ -42,6 +44,7 @@ return [
             'item' => 'bi bi-star mr-1',
             'effectivity' => 'bi bi-shield-lock mr-1',
             'entity' => 'fas fa-paw mr-1',
+            'structure' => 'bi bi-building mr-1',
             'version' => 'bi bi-archive mr-1',
         ],
         'category' => 'bi bi-collection mr-1',
@@ -53,6 +56,7 @@ return [
             'item' => '{1} Item|[2,*] Items',
             'entity' => '{1} Entity|[2,*] Entities',
             'effectivity' => '{1} Effectivity|[2,*] Effectivies',
+            'structure' => '{1} Structure|[2,*] Structures',
             'version' => '{1} Version|[2,*] Versions',
         ]
     ],
