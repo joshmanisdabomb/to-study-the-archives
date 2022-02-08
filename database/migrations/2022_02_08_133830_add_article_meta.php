@@ -14,7 +14,7 @@ class AddArticleMeta extends Migration
     public function up()
     {
         Schema::table('articles', function (Blueprint $table) {
-            $table->string('author')->after('slug2');
+            $table->string('author')->nullable()->after('slug2');
             $table->enum('status', ['complete', 'incomplete', 'custom', 'stub'])->after('author');
             $table->timestamp('published_at')->nullable()->after('status');
             $table->timestamp('edited_at')->nullable()->after('published_at');
