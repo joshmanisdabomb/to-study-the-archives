@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Handlers\Fragment\TextFragmentHandler;
+use App\Handlers\Fragment\ParagraphFragmentHandler;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -72,7 +72,7 @@ class Article extends Model
     public function getExcerptAttribute() : ?string {
         $fragment = $this->sections()->whereHas('fragments', function(Builder $query) { $query->where('type', '=', 'text'); })->get();
         if (!$fragment) return null;
-        return strip_tags(TextFragmentHandler::getMarkup($fragment->flatMap(fn(ArticleSection $s) => $s->fragments)->first()->markup));
+        return strip_tags(ParagraphFragmentHandler::getMarkup($fragment->flatMap(fn(ArticleSection $s) => $s->fragments)->first()->markup));
     }
 
 }

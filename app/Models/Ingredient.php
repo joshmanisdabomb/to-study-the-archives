@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Handlers\Link\LinkHandler;
+use App\Handlers\Fragment\TextFragmentHandler;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
@@ -10,7 +10,7 @@ use Jenssegers\Model\Model;
 
 class Ingredient extends Model {
 
-    protected $fillable = ['item', 'tag', 'count', 'translation', 'link', 'vararg'];
+    protected $fillable = ['item', 'tag', 'name', 'count', 'link', 'vararg'];
 
     public static function renderSlot(?Ingredient $inside, string $class = 'gui-slot gui-slot-back') : string {
         return '<div class="' . $class . '">' . ($inside ? $inside->insideSlot() : '') . '</div>';
@@ -30,28 +30,9 @@ class Ingredient extends Model {
         return explode(':', $this->item, 2)[1];
     }
 
-    public function getNameAttribute() : ?string {
-        $id = $this->id;
-        return $this->translation ?: $id;
-    }
-
     public function setTagFrom(array $tags) : Ingredient {
         if (!$this->item && $this->tag) {
             return new MultiIngredient(collect($tags[$this->tag])->map(fn($ing) => Ingredient::fromArray(array_replace($this->attributesToArray(), $ing)))->all());
-        }
-        return $this;
-    }
-
-    public function setNameFrom(array $translations) : Ingredient {
-        if ($this->item) {
-            $this->translation = $translations[$this->item][App::currentLocale()] ?? $translations[$this->item][Config::get('fallback_locale')] ?? $this->id;
-        }
-        return $this;
-    }
-
-    public function setLinkFrom(array $links) : Ingredient {
-        if ($this->item) {
-            $this->link = $links[$this->item] ?? null;
         }
         return $this;
     }
@@ -62,7 +43,7 @@ class Ingredient extends Model {
             $block = 'images/models/' . $this->namespace . '/block/' . $this->path . '.png';
             $item = 'images/models/' . $this->namespace . '/item/' . $this->path . '.png';
             $asset = file_exists(public_path() . '/' . $block) ? $block : $item;
-            $content .= '<img class="gui-ingredient" src="' . asset($asset) . '" alt="' . $this->name . '" data-mctooltip="' . $this->name . '">';
+            $content .= '<img class="gui-ingredient" src="' . asset($asset) . '" alt="' . TextFragmentHandler::displayText($this->name) . '" data-mctooltip="' . TextFragmentHandler::displayText($this->name) . '">';
         }
         if ($this->link) {
             $handler = LinkHandler::getHandlerForType($this->link['type']);

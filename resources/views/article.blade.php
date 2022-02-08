@@ -6,13 +6,13 @@
             @endif
             <div class="{{ $info ? 'border-gray-400 md:border-l-2 md:pl-4 md:ml-1 py-3' : '' }}">
                 <h1 class="font-semibold font-bold text-4xl text-gray-800 leading-tight">
-                    {{ $article->name }}
+                    {{ \App\Handlers\Fragment\TextFragmentHandler::displayJsonText($article->name) }}
                 </h1>
                 <span class="text-gray-500"><i class="{!! __('wiki.icons.registry.' . $article->slug1) !!}"></i>{{ ucwords(str_replace('_', ' ', $article->slug1)) }}</span>
                 <aside>
                     <div>
                         @foreach ($main as $section)
-                            <a href="#section-{{ $section->id }}" title="{{ $section->name }}" class="underline text-blue-500 hover:text-blue-800 visited:text-blue-600">{{ $section->name }}</a>
+                            <a href="#section-{{ $section->id }}" title="{{ \App\Handlers\Fragment\TextFragmentHandler::displayJsonText($section->name) }}" class="underline text-blue-500 hover:text-blue-800 visited:text-blue-600">{{ \App\Handlers\Fragment\TextFragmentHandler::displayJsonText($section->name) }}</a>
                             @if (!$loop->last)
                                 <span class="wiki-separator">-</span>
                             @endif
@@ -62,7 +62,7 @@
                 <x-alerts />
                 <div class="p-6 bg-white border-b border-gray-200">
                     @foreach ($main as $section)
-                        <h2 id="section-{{ $section->id }}" class="font-semibold text-2xl">{{ $section->name }}</h2>
+                        <h2 id="section-{{ $section->id }}" class="font-semibold text-2xl">{{ \App\Handlers\Fragment\TextFragmentHandler::displayJsonText($section->name) }}</h2>
                         @foreach ($section->fragments as $fragment)
                             {!! \App\Handlers\Fragment\FragmentHandler::render($fragment->markup, function(string $content, array $markup, string $class) {
                                 return $class::getOuterMarkup($content, $markup);
