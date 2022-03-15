@@ -26,7 +26,7 @@ class RecipeFragmentHandler extends FragmentHandler {
                 $content .= '<div class="my-2 gui' . (($fragment['obsolete'] ?? false) ? ' gui-transparent' : '') . ' md:justify-start justify-center items-center flex-wrap md:flex-nowrap"><div class="flex">' . $tab . '<div class="gui-border w-max">' . $markup . '</div></div>';
                 $note = $fragment['note'] ?? null;
                 if ($note) {
-                    FragmentHandler::render($note, fn(string $content) => '<p class="wiki-recipe-note">' . $content . '</p>');
+                    $content .= FragmentHandler::render($note, fn(string $content) => '<p class="wiki-recipe-note">' . $content . '</p>');
                 }
                 $content .= '</div>';
             } else {

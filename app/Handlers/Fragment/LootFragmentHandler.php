@@ -23,20 +23,7 @@ class LootFragmentHandler extends FragmentHandler {
 
         $note = $fragment['note'] ?? null;
         if ($note) {
-            $handler = FragmentHandler::getHandlerForType($note['fragment']);
-            if (class_exists($handler)) {
-                $content .= '<p class="wiki-recipe-note">' . $handler::getMarkup($note) . '</p>';
-            } else {
-                $cloner = new VarCloner();
-                $dumper = new HtmlDumper();
-
-                $dumper->dump(
-                    $cloner->cloneVar($note),
-                    function ($line, $depth) use (&$content) {
-                        if ($depth >= 0) $content .= str_repeat('  ', $depth).$line."\n";
-                    }
-                );
-            }
+            $content .= FragmentHandler::render($note, fn(string $content) => '<p class="wiki-recipe-note">' . $content . '</p>');
         }
 
         $content .= '</div>';
