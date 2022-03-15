@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Article
+ * Class PageTraffic
  * @package App\Models
  * @mixin \Illuminate\Database\Eloquent\Builder
  *

@@ -24,10 +24,9 @@ use Illuminate\Support\Facades\File;
  * @property \Carbon\Carbon|null deleted_at
  *
  * @property-read \App\Models\ArticleSection[] sections
- * @property-read \App\Models\ArticleSection[] sectionsMain
- * @property-read \App\Models\ArticleSection[] sectionsInfo
  * @property-read \App\Models\ArticleRedirect[] redirects
  * @property-read \App\Models\ArticleTag[] tags
+ * @property-read \App\Models\ArticleIndex[] indices
  *
  * @property-read string location
  * @property-read ?string image
@@ -55,6 +54,10 @@ class Article extends Model
 
     public function tags() {
         return $this->hasMany(ArticleTag::class);
+    }
+
+    public function indices() {
+        return $this->hasMany(ArticleIndex::class);
     }
 
     public function getLocationAttribute() : string {

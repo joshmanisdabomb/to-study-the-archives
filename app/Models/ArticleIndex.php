@@ -6,28 +6,35 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class ArticleTag
+ * Class ArticleIndex
  * @package App\Models
  * @mixin \Illuminate\Database\Eloquent\Builder
  *
  * @property int article_id
- * @property string tag
+ * @property int article_redirect_id
+ * @property string locale
+ * @property string name
  *
  * @property-read \App\Models\Article article
+ * @property-read \App\Models\ArticleRedirect articleRedirect
  */
-class ArticleTag extends Model
+class ArticleIndex extends Model
 {
     protected $fillable = [
         'article_id',
-        'tag',
+        'article_redirect_id',
+        'locale',
+        'name',
     ];
-
-    protected $primaryKey = 'article_id';
 
     use HasFactory;
 
     public function article() {
         return $this->belongsTo(Article::class);
+    }
+
+    public function articleRedirect() {
+        return $this->belongsTo(ArticleRedirect::class);
     }
 
 }

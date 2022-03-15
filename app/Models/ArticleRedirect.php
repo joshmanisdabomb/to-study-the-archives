@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Article
+ * Class ArticleRedirect
  * @package App\Models
  * @mixin \Illuminate\Database\Eloquent\Builder
  *
@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null deleted_at
  *
  * @property-read \App\Models\Article article
+ * @property-read \App\Models\ArticleIndex[] indices
  *
  * @property-read string location
  * @property-read ?string image
@@ -40,6 +41,10 @@ class ArticleRedirect extends Model
 
     public function article() {
         return $this->belongsTo(Article::class);
+    }
+
+    public function indices() {
+        return $this->hasMany(ArticleIndex::class);
     }
 
     public function getLocationAttribute() : string {

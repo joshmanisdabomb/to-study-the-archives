@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Handlers\Fragment\FragmentHandler;
+use App\Handlers\Fragment\TextFragmentHandler;
 use App\Models\Article;
+use App\Models\ArticleIndex;
 use App\Models\ArticleRedirect;
-use App\Models\ArticleSection;
+use App\Models\ArticleTitle;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\App;
 
 class ArticleController extends Controller {
 
@@ -56,29 +60,52 @@ class ArticleController extends Controller {
     }
 
     public function search() {
-        $term = request('q');
-        $chars = strlen($term);
+        $locale = App::currentLocale();
 
-        $article = Article::where('name', '=', $term)->whereNull('deleted_at')->first();
+        //Index translations for articles without them in the current locale.
+        $translates = Article::with(['redirects'])->has('indices', '=', 0, 'and', function(Builder $query) {
+            $query->where('locale', '=', App::currentLocale());
+        })->whereNull('deleted_at')->get();
+        foreach ($translates as $translate) {
+            ArticleIndex::create([
+                'article_id' => $translate->id,
+                'article_redirect_id' => null,
+                'locale' => App::currentLocale(),
+                'name' => TextFragmentHandler::displayJsonText($translate->name)
+            ]);
+            foreach ($translate->redirects as $redirect) {
+                if ($redirect->name) {
+                    ArticleIndex::create([
+                        'article_id' => $translate->id,
+                        'article_redirect_id' => $redirect->id,
+                        'locale' => App::currentLocale(),
+                        'name' => TextFragmentHandler::displayJsonText($redirect->name)
+                    ]);
+                }
+            }
+        }
+
+        //Perform search with this index.
+        $term = request('q');
+
+        //Article indexed name exact match.
+        $article = Article::whereHas('indices', function(Builder $query) use ($term) { $query->where('name', '=', $term); })->whereNull('deleted_at')->first();
         if ($article) return redirect()->route('article', ['slug1' => $article->slug1, 'slug2' => $article->slug2]);
 
-        $redirect = ArticleRedirect::where('name', '=', $term)->first();
-        if ($redirect) return redirect()->route('article', [
-            'slug1' => $redirect->article->slug1,
-            'slug2' => $redirect->article->slug2
-        ]);
-
-        $query = Article::with(['sections', 'sections.fragments'])->where('name', 'like', '%' . $term . '%')->whereNull('deleted_at');
+        //Search term matches.
+        $query = Article::whereHas('indices', function(Builder $query) use ($term) { $query->where('name', 'like', '%' . $term . '%'); })->with(['sections', 'sections.fragments'])->whereNull('deleted_at');
         $matches = $query->get();
 
-        $query = Article::with(['sections', 'sections.fragments'])->where(function($query) use ($term, $chars) {
-            for ($i = 0; $i <= $chars; $i++) {
-                $query->orWhere('name', 'like', '%' . substr_replace($term, '_', $i, 0) . '%');
-                if ($i != $chars) $query->orWhere('name', 'like', '%' . substr_replace($term, '_', $i, 1) . '%');
-            }
-        });
-        $query->whereNotIn('id', $matches->pluck('id'));
-        $query->whereNull('deleted_at');
+        //Typo matches.
+        $chars = strlen($term);
+        $query = Article::whereHas('indices', function(Builder $query) use ($term, $chars) {
+            $query->whereNested(function(\Illuminate\Database\Query\Builder $query) use ($term, $chars) {
+                for ($i = 0; $i <= $chars; $i++) {
+                    $query->orWhere('name', 'like', '%' . substr_replace($term, '_', $i, 0) . '%');
+                    if ($i != $chars) $query->orWhere('name', 'like', '%' . substr_replace($term, '_', $i, 1) . '%');
+                }
+            });
+        })->with(['sections', 'sections.fragments'])->whereNotIn('id', $matches->pluck('id'))->whereNull('deleted_at');
         $typos = $query->get();
 
         return view('search', [
