@@ -23,7 +23,7 @@ class CraftingShapedRecipeHandler extends GridRecipeHandler {
     }
 
     public static function getTabMarkup(array $fragment) : ?string {
-        return Ingredient::renderSlot(Ingredient::fromArray(['item' => 'minecraft:crafting_table', 'translation' => __("wiki.recipe." . CraftingShapedRecipeHandler::type())]), 'gui-slot');
+        return Ingredient::renderSlot(Ingredient::fromArray(['item' => 'minecraft:crafting_table', 'name' => ['text' => __("wiki.recipe." . CraftingShapedRecipeHandler::type())]]), 'gui-slot');
     }
 
 }

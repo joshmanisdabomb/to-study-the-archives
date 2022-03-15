@@ -2,6 +2,7 @@
 
 namespace App\Handlers\Recipe;
 
+use App\Handlers\Fragment\TextFragmentHandler;
 use App\Models\Ingredient;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
@@ -26,7 +27,7 @@ abstract class RefiningRecipeHandler extends RecipeHandler {
                 ' . collect(static::getIngredientGrid($recipe))->flatten(1)->map(fn(?Ingredient $ing) => Ingredient::renderSlot($ing))->implode('') . '
             </div>
             <div class="flex flex-col items-center gap-1">
-                <div data-mctooltip="' . static::getAction($recipe['translations']) . '" class="gui-refiner-icon gui-refiner-icon-' . static::getIconIndex($recipe) . '"></div>
+                <div data-mctooltip="' . TextFragmentHandler::displayText(static::getAction($recipe)) . '" class="gui-refiner-icon gui-refiner-icon-' . static::getIconIndex($recipe) . '"></div>
                 <img class="gui-arrow" src="' . asset('images/gui/arrow.png') . '" alt="">
             </div>
             <div class="grid" style="grid-template-columns: ' . implode(' ', array_fill(0, static::getOutputGridWidth($recipe), '1fr')) . ';">
@@ -39,12 +40,12 @@ abstract class RefiningRecipeHandler extends RecipeHandler {
         </div>';
     }
 
-    protected static function getIconIndex(array $recipe) {
+    protected static function getIconIndex(array $recipe) : int {
         return $recipe['icon'];
     }
 
-    protected static function getAction(array $translations) {
-        return $translations['action'][App::currentLocale()] ?? $translations['action'][Config::get('fallback_locale')];
+    protected static function getAction(array $recipe) : array {
+        return ['translate' => $recipe['lang']];
     }
 
 }

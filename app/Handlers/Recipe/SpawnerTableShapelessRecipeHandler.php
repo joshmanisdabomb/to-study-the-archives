@@ -13,7 +13,7 @@ class SpawnerTableShapelessRecipeHandler extends SpawnerTableRecipeHandler {
     }
 
     public static function getTabMarkup(array $fragment) : ?string {
-        return Ingredient::renderSlot(Ingredient::fromArray(['item' => 'lcc:spawner_table', 'translation' => __("wiki.recipe." . SpawnerTableShapelessRecipeHandler::type())]), 'gui-slot');
+        return Ingredient::renderSlot(Ingredient::fromArray(['item' => 'lcc:spawner_table', 'name' => ['text' => __("wiki.recipe." . SpawnerTableShapelessRecipeHandler::type())]]), 'gui-slot');
     }
 
 }

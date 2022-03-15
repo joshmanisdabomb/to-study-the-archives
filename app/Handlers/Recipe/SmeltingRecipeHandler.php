@@ -32,7 +32,7 @@ abstract class SmeltingRecipeHandler extends RecipeHandler {
     }
 
     public static function getTabMarkup(array $fragment) : ?string {
-        return Ingredient::renderSlot(Ingredient::fromArray(['item' => 'minecraft:furnace', 'translation' => __("wiki.recipe." . SmeltingRecipeHandler::type())]), 'gui-slot');
+        return Ingredient::renderSlot(Ingredient::fromArray(['item' => 'minecraft:furnace', 'name' => ['text' => __("wiki.recipe." . SmeltingRecipeHandler::type())]]), 'gui-slot');
     }
 
 }

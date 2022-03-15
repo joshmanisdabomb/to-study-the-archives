@@ -25,7 +25,7 @@ abstract class StonecuttingRecipeHandler extends RecipeHandler {
     }
 
     public static function getTabMarkup(array $fragment) : ?string {
-        return Ingredient::renderSlot(Ingredient::fromArray(['item' => 'minecraft:stonecutter', 'translation' => __("wiki.recipe." . StonecuttingRecipeHandler::type())]), 'gui-slot');
+        return Ingredient::renderSlot(Ingredient::fromArray(['item' => 'minecraft:stonecutter', 'name' => ['text' => __("wiki.recipe." . StonecuttingRecipeHandler::type())]]), 'gui-slot');
     }
 
 }

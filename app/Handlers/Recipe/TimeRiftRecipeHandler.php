@@ -23,7 +23,7 @@ class TimeRiftRecipeHandler extends RecipeHandler {
     }
 
     public static function getTabMarkup(array $fragment) : ?string {
-        return Ingredient::renderSlot(Ingredient::fromArray(['item' => 'lcc:time_rift', 'translation' => __("wiki.recipe." . TimeRiftRecipeHandler::type())]), 'gui-slot');
+        return Ingredient::renderSlot(Ingredient::fromArray(['item' => 'lcc:time_rift', 'name' => ['text' => __("wiki.recipe." . TimeRiftRecipeHandler::type())]]), 'gui-slot');
     }
 
 }
