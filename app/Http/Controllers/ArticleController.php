@@ -7,7 +7,6 @@ use App\Handlers\Fragment\TextFragmentHandler;
 use App\Models\Article;
 use App\Models\ArticleIndex;
 use App\Models\ArticleRedirect;
-use App\Models\ArticleTitle;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\App;
 

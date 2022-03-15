@@ -6,7 +6,7 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\WikiController;
 use App\Models\Version;
 use App\Models\VersionGroup;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +29,7 @@ Route::get('/random', [ArticleController::class, 'random'])->name('random');
 
 Route::get('/downloads', function() {
     return view('downloads', [
-        'groups' => VersionGroup::whereHas('versions', function(Builder $query) {})->where([])->orderBy('order')->get()
+        'groups' => VersionGroup::with(['versions' => function(Relation $query) { $query->whereNotNull('released_at'); }])->orderBy('order')->get()
     ]);
 })->name('downloads');
 
