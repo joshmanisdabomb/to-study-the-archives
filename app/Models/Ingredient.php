@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Handlers\Fragment\LinkFragmentHandler;
 use App\Handlers\Fragment\TextFragmentHandler;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
@@ -37,17 +38,32 @@ class Ingredient extends Model {
         return $this;
     }
 
+    public function setNameFrom(array $translations) : Ingredient {
+        if ($this->item) {
+            $this->name = $translations[$this->item];
+        }
+        return $this;
+    }
+
+    public function setLinkFrom(array $links) : Ingredient {
+        if ($this->item) {
+            $this->link = $links[$this->item] ?? null;
+        }
+        return $this;
+    }
+
     public function insideSlot() : string {
         $content = '';
         if ($this->item) {
             $block = 'images/models/' . $this->namespace . '/block/' . $this->path . '.png';
             $item = 'images/models/' . $this->namespace . '/item/' . $this->path . '.png';
             $asset = file_exists(public_path() . '/' . $block) ? $block : $item;
-            $content .= '<img class="gui-ingredient" src="' . asset($asset) . '" alt="' . TextFragmentHandler::displayText($this->name) . '" data-mctooltip="' . TextFragmentHandler::displayText($this->name) . '">';
+            $name = ($this->name != null) ? TextFragmentHandler::displayText($this->name) : null;
+            $content .= '<img class="gui-ingredient" src="' . asset($asset) . '" alt="' . $name . '" data-mctooltip="' . $name . '">';
         }
         if ($this->link) {
-            $handler = LinkHandler::getHandlerForType($this->link['type']);
-            $content = $handler::getImageMarkup($this->link, $content);
+            $properties = LinkFragmentHandler::getLinkProperties($this->link);
+            $content = "<a target='{$properties['target']}' href='{$properties['href']}'>" . $content . '</a>';
         }
         if ($this->vararg) $this->count = '...';
         if (!is_numeric($this->count) || $this->count > 1) {
