@@ -70,8 +70,7 @@ class Article extends Model
     }
 
     public function getExcerptAttribute() : ?string {
-        $fragment = $this->sections()->whereHas('fragments', function(Builder $query) { $query->where('type', '=', 'text'); })->get();
-        if (!$fragment) return null;
+        $fragment = $this->sections()->whereHas('fragments', function(Builder $query) { $query->where('type', '=', 'paragraph'); })->get();
         return strip_tags(ParagraphFragmentHandler::getMarkup($fragment->flatMap(fn(ArticleSection $s) => $s->fragments)->first()->markup));
     }
 

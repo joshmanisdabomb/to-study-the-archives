@@ -54,7 +54,7 @@
                             <div class="text-left">
                                 @foreach ($popular as $article)
                                     <div class="grid" style="grid-template-columns: 1fr auto;">
-                                        <a href="{{ route("article", ['slug1' => $article->slug1, 'slug2' => $article->slug2]) }}" class="underline text-blue-500 hover:text-blue-800 visited:text-blue-600">{{ $article->name }}</a>
+                                        <a href="{{ route("article", ['slug1' => $article->slug1, 'slug2' => $article->slug2]) }}" class="underline text-blue-500 hover:text-blue-800 visited:text-blue-600">{{ \App\Handlers\Fragment\TextFragmentHandler::displayJsonText($article->name) }}</a>
                                         <p>{{ $article->counter }}</p>
                                     </div>
                                 @endforeach
@@ -67,7 +67,7 @@
                             </div>
                             <div class="text-left">
                                 @foreach ($guides as $article)
-                                    <p><a href="{{ route("article", ['slug1' => $article->slug1, 'slug2' => $article->slug2]) }}" class="underline text-blue-500 hover:text-blue-800 visited:text-blue-600">{{ $article->name }}</a></p>
+                                    <p><a href="{{ route("article", ['slug1' => $article->slug1, 'slug2' => $article->slug2]) }}" class="underline text-blue-500 hover:text-blue-800 visited:text-blue-600">{{ \App\Handlers\Fragment\TextFragmentHandler::displayJsonText($article->name) }}</a></p>
                                 @endforeach
                             </div>
                         </div>

@@ -21,7 +21,7 @@
                                 <div class="wiki-search-image bg-gray-200" style="background-image: url('{{ $match->image }}')"></div>
                             @endif
                             <div class="px-4 py-3 flex-grow flex flex-col leading-normal w-full border-gray-400 border-l-4">
-                                <div class="font-bold text-xl mb-1">{{ $match->name }}</div>
+                                <div class="font-bold text-xl mb-1">{{ \App\Handlers\Fragment\TextFragmentHandler::displayJsonText($match->name) }}</div>
                                 <p class="text-gray-700 text-base">{{ $match->excerpt }}</p>
                             </div>
                         </a>
@@ -35,7 +35,7 @@
                                 <div class="wiki-search-image bg-gray-200" style="background-image: url('{{ $similar->image }}')"></div>
                             @endif
                             <div class="px-4 py-3 flex-grow flex flex-col leading-normal w-full border-gray-400 border-l-4">
-                                <div class="font-bold text-xl mb-1">{{ $similar->name }}</div>
+                                <div class="font-bold text-xl mb-1">{{ \App\Handlers\Fragment\TextFragmentHandler::displayJsonText($similar->name) }}</div>
                                 <p class="text-gray-700 text-base">{{ $similar->excerpt }}</p>
                             </div>
                         </a>

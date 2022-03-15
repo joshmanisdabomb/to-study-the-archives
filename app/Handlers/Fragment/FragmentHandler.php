@@ -42,7 +42,7 @@ abstract class FragmentHandler {
             return '<' . $tag . ' class="max-w w-full lg:max-w-full border border-gray-300 bg-white rounded ' . ($article->link ? 'text-indigo-500 hover:text-indigo-800 visited:text-indigo-600 ' : '') . 'flex" href="' . route('article', ['slug1' => $article->slug1, 'slug2' => $article->slug2]) . '">' .
                 ($article->image !== null ? '<div class="wiki-article-list-image bg-gray-200" style="background-image: url(\'' . $article->image . '\')"></div>' : '') .
                 '<div class="px-4 py-3 flex-grow flex flex-col leading-normal w-full border-gray-400 border-l-4">
-                    <div class="font-bold text-xl">' . $article->name . '</div>
+                    <div class="font-bold text-xl">' . TextFragmentHandler::displayJsonText($article->name) . '</div>
                 </div>
             </' . $tag . '>';
         })->join('') . '</div>';
