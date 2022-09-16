@@ -22,7 +22,7 @@ Route::post('/pluralise', function (Request $request) {
 
 Route::post('/upload-build', function (Request $request) {
     if ($request->post('key', '') !== env('API_KEY')) throw new AuthenticationException;
-    $request->file('jar')->store('builds/ci');
-    $request->file('storage')->store('builds/ci');
+    $request->file('build')->store('builds/ci');
+    $request->file('sources')->store('builds/ci');
     return response()->json(['success' => 1]);
 });
