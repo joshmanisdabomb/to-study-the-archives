@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -17,4 +18,11 @@ use Illuminate\Support\Str;
 
 Route::post('/pluralise', function (Request $request) {
     return response()->json(collect($request->json()->all())->map(fn(string $value) => Str::plural($value)));
+});
+
+Route::post('/upload-build', function (Request $request) {
+    if ($request->post('key', '') !== env('API_KEY')) throw new AuthenticationException;
+    $request->file('jar')->store('builds/ci');
+    $request->file('storage')->store('builds/ci');
+    return response()->json(['success' => 1]);
 });
