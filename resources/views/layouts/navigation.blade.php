@@ -28,7 +28,7 @@
                         <x-nav-link :href="route('category', ['registry' => 'version'])" :active="request()->routeIs('category') && request()->route('registry') == 'version'">
                             {{ __('wiki.navigation.version') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('downloads')" :active="request()->routeIs('downloads')">
+                        <x-nav-link :href="route('downloads')" :active="request()->routeIs('downloads') || request()->routeIs('nightly')">
                             {{ __('wiki.navigation.downloads') }}
                         </x-nav-link>
                     </div>

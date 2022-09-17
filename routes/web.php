@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DownloadsController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\WikiController;
 use App\Models\Version;
@@ -27,11 +28,10 @@ Route::get('/category/{registry}', [CategoryController::class, 'view'])->where([
 
 Route::get('/random', [ArticleController::class, 'random'])->name('random');
 
-Route::get('/downloads', function() {
-    return view('downloads', [
-        'groups' => VersionGroup::with(['versions' => function(Relation $query) { $query->whereNotNull('released_at'); }])->orderBy('order')->get()
-    ]);
-})->name('downloads');
+Route::get('/downloads', [DownloadsController::class, 'home'])->name('downloads');
+Route::get('/downloads/nightly', [DownloadsController::class, 'nightly'])->name('nightly');
+Route::get('/downloads/build/{build}', [DownloadsController::class, 'build'])->whereNumber(['build'])->name('build');
+Route::get('/downloads/source/{build}', [DownloadsController::class, 'source'])->whereNumber(['build'])->name('source');
 
 Route::get('/search', [ArticleController::class, 'search'])->name('search');
 

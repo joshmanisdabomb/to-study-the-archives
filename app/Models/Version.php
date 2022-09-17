@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null released_at
  *
  * @property-read \App\Models\VersionGroup group
+ * @property-read \App\Models\Build[] builds
  *
  * @property-read ?string bitbucketDownload
  */
@@ -29,6 +30,10 @@ class Version extends Model
 
     public function group() {
         return $this->belongsTo(VersionGroup::class, 'group_id');
+    }
+
+    public function builds() {
+        return $this->hasMany(Build::class, 'version_id');
     }
 
     public function getBitbucketDownloadAttribute() : ?string {

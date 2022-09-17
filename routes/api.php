@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Build;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +23,24 @@ Route::post('/pluralise', function (Request $request) {
 
 Route::post('/upload-build', function (Request $request) {
     if ($request->post('key', '') !== env('API_KEY')) throw new AuthenticationException;
-    $request->file('build')->store('builds/ci');
-    $request->file('sources')->store('builds/ci');
-    return response()->json(['success' => 1]);
+    $gradle = $request->file('gradle')->get();
+    $lines = preg_split('/\r\n|\r|\n/', $gradle);
+    foreach ($lines as $line) {
+        if (strpos($line, 'minecraft_version=') === 0) {
+            $mcver = substr($line, 18);
+        } elseif (strpos($line, 'root_version=') === 0) {
+            $modver = substr($line, 13);
+        }
+    }
+    $build = Build::create([
+        'nightly' => strpos($request->post('ref'), 'refs/tags/') !== 0,
+        'mc_version' => $mcver ?? null,
+        'mod_version' => $modver ?? null,
+        'path' => $request->file('build')->store('builds'),
+        'source_path' => $request->file('sources')->store('builds'),
+        'run_number' => (int)$request->post('run_number'),
+        'ref_name' => $request->post('ref_name'),
+        'sha' => $request->post('sha'),
+    ]);
+    return response()->json($build);
 });
