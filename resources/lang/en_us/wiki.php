@@ -58,6 +58,8 @@ return [
             'effectivity' => '{1} Effectivity|[2,*] Effectivies',
             'structure' => '{1} Structure|[2,*] Structures',
             'version' => '{1} Version|[2,*] Versions',
+            'biome' => '{1} Biome|[2,*] Biomes',
+            'challenge' => '{1} Challenge|[2,*] Challenges',
         ]
     ],
     'list' => [
