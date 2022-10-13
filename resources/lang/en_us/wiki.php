@@ -55,7 +55,7 @@ return [
             'block' => '{1} Block|[2,*] Blocks',
             'item' => '{1} Item|[2,*] Items',
             'entity' => '{1} Entity|[2,*] Entities',
-            'effectivity' => '{1} Effectivity|[2,*] Effectivies',
+            'effectivity' => '{1} Effectivity|[2,*] Effectivities',
             'structure' => '{1} Structure|[2,*] Structures',
             'version' => '{1} Version|[2,*] Versions',
             'biome' => '{1} Biome|[2,*] Biomes',

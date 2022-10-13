@@ -7,6 +7,7 @@ use App\Models\ArticleRedirect;
 use App\Models\ArticleTag;
 use App\Models\PageTraffic;
 use App\Models\Version;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\DB;
 
 class WikiController extends Controller {
@@ -18,7 +19,7 @@ class WikiController extends Controller {
             'registries' => Article::query()->select(['slug1'])->distinct()->whereNull('deleted_at')->orderBy('slug1')->pluck('slug1'),
             'popular' => Article::query()->whereNull('deleted_at')->join('page_traffic', DB::raw('CONCAT(articles.slug1, "/", articles.slug2)'), '=', 'page_traffic.page')->orderByDesc('counter')->orderBy('name')->get(),
             'guides' => Article::where('registry', 'lcc:guide')->whereNull('deleted_at')->orderBy('name')->get(),
-            'current' => Version::latest('released_at')->first(),
+            'current' => Version::with(['builds' => function(Relation $query) { $query->where(['nightly' => 0]); }])->latest('released_at')->first(),
         ]);
     }
 

@@ -21,7 +21,7 @@
                         @endforeach
                     </div>
 
-                    <h2 class="text-lg my-12">The current version of the mod is <a class="underline text-blue-500 hover:text-blue-800 visited:text-blue-600" href="{{ route('article', ['slug1' => 'version', 'slug2' => $current->code]) }}">LCC {{ $current->mod_version }}</a>, which can be downloaded <a class="underline text-blue-500 hover:text-blue-800 visited:text-blue-600" href="{{ $current->bitbucketDownload }}">here</a>.</h2>
+                    <h2 class="text-lg my-12">The current version of the mod is <a class="underline text-blue-500 hover:text-blue-800 visited:text-blue-600" href="{{ route('article', ['slug1' => 'version', 'slug2' => $current->code]) }}">LCC {{ $current->mod_version }}</a>, which can be downloaded <a class="underline text-blue-500 hover:text-blue-800 visited:text-blue-600" href="{{ route('build', $current->builds[0]) }}">here</a>.</h2>
 
                     <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1">
                         <div class="">
