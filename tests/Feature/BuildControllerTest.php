@@ -114,7 +114,7 @@ class BuildControllerTest extends TestCase
             'sha' => '1234567890abcdef1234567890abcdef12345678',
         ];
         $expected = [
-            'id' => 2,
+            'id' => 1,
             'nightly' => false,
             'repository' => $data['repository'],
             'mod_identifier' => $properties['mod_id'],
@@ -125,22 +125,22 @@ class BuildControllerTest extends TestCase
             'commit' => $data['sha'],
             'files' => [
                 [
-                    'build_id' => 2,
+                    'build_id' => 1,
                     'type' => 'forge',
                     'sources' => false,
                 ],
                 [
-                    'build_id' => 2,
+                    'build_id' => 1,
                     'type' => 'fabric',
                     'sources' => false,
                 ],
                 [
-                    'build_id' => 2,
+                    'build_id' => 1,
                     'type' => 'quilt',
                     'sources' => false,
                 ],
                 [
-                    'build_id' => 2,
+                    'build_id' => 1,
                     'type' => null,
                     'sources' => true,
                 ],
