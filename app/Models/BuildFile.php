@@ -32,6 +32,10 @@ class BuildFile extends Model
         'created_at',
     ];
 
+    protected $casts = [
+        'sources' => 'boolean',
+    ];
+
     public function build() {
         return $this->belongsTo(Build::class, 'build_id');
     }

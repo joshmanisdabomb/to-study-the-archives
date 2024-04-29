@@ -6,6 +6,7 @@ use App\Models\Build;
 use App\Models\BuildFile;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class BuildController extends Controller
@@ -24,8 +25,9 @@ class BuildController extends Controller
             }
         }
 
-        $build = Build::create([
-            'nightly' => !str_starts_with($request->post('ref'), 'refs/tags/'),
+        $nightly = !str_starts_with($request->post('ref'), 'refs/tags/');
+        Build::upsert([
+            'nightly' => $nightly,
             'repository' => $request->post('repository'),
             'mod_identifier' => $modid ?? null,
             'mod_version' => $modver ?? null,
@@ -33,7 +35,12 @@ class BuildController extends Controller
             'run_number' => (int)$request->post('run_number'),
             'ref_name' => $request->post('ref_name'),
             'commit' => $request->post('sha'),
-        ]);
+        ], ['commit'], array_filter([$nightly ? 'nightly' : null, 'repository', 'mod_identifier', 'mod_version', 'mc_version', 'run_number', 'ref_name']));
+        $build = Build::where(['commit' => $request->post('sha')])->with('files')->first();
+        foreach ($build->files as $file) {
+            Storage::disk()->delete($file->path);
+        }
+        $build->files()->delete();
 
         foreach (['build', 'forge', 'fabric', 'quilt', 'source'] as $type) {
             $file = $request->file($type);

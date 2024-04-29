@@ -41,6 +41,10 @@ class Build extends Model
         'created_at',
     ];
 
+    protected $casts = [
+        'nightly' => 'boolean',
+    ];
+
     public function version() {
         return $this->belongsTo(ModVersion::class, 'commit', 'commit');
     }
