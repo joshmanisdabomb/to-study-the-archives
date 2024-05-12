@@ -21,10 +21,15 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean tags
  *
  * @property-read \App\Models\ModVersion[] versions
+ * @property-read \App\Models\ModVersion|null latest
  */
 class Mod extends Model
 {
     public function versions() {
         return $this->hasMany(ModVersion::class, 'mod_id');
+    }
+
+    public function latest() {
+        return $this->hasOne(ModVersion::class, 'mod_id')->whereNotNull('released_at')->latest('released_at');
     }
 }

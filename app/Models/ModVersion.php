@@ -21,17 +21,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null released_at
  *
  * @property-read \App\Models\Mod mod
- * @property-read \App\Models\Build[] builds
+ * @property-read \App\Models\Build[] build
  */
 class ModVersion extends Model
 {
-    protected $dates = ['released_at'];
+    protected $casts = [
+        'released_at' => 'datetime',
+    ];
 
     public function mod() {
         return $this->belongsTo(Mod::class, 'mod_id');
     }
 
-    public function builds() {
-        return $this->hasMany(Build::class, 'commit', 'commit')->where(['nightly' => false]);
+    public function build() {
+        return $this->hasOne(Build::class, 'commit', 'commit')->where(['nightly' => false]);
     }
 }
