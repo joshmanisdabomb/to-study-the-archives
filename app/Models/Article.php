@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,6 +20,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null updated_at
  *
  * @property-read \App\Models\ContentUpdate contentUpdate
+ *
+ * @property-read string slug
  */
 class Article extends Model
 {
@@ -37,5 +40,9 @@ class Article extends Model
 
     public function contentUpdate() {
         return $this->belongsTo(ContentUpdate::class, 'content_id');
+    }
+
+    public function slug(): Attribute {
+        return Attribute::make(fn ($value, array $attributes) => $attributes['namespace'] . ':' . $attributes['identifier']);
     }
 }
