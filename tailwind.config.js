@@ -1,9 +1,12 @@
 /** @type {import('tailwindcss').Config} */
+let plugin = require('tailwindcss/plugin')
+
 export default {
     content: [
         "./resources/**/*.blade.php",
         "./resources/**/*.js",
         "./resources/**/*.vue",
+        "./node_modules/flowbite/**/*.js",
     ],
     theme: {
         fontFamily: {
@@ -47,6 +50,11 @@ export default {
             },
         },
     },
-    plugins: [],
+    plugins: [
+        require('flowbite/plugin'),
+        plugin(function ({ addVariant }) {
+            addVariant('selected', '&.selected')
+        })
+    ],
 }
 
