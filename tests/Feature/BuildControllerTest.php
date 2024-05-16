@@ -101,30 +101,35 @@ class BuildControllerTest extends TestCase
 
     public function test_build_version_after_nightly(): void
     {
-        $this->createRequest([
+        $properties = [
             'minecraft_version' => '1.21',
             'mod_id' => 'to_market',
             'mod_version' => '2.0.0'
-        ], [
+        ];
+        $data = [
             'repository' => 'joshmanisdabomb/to-market-to-market',
+            'sha' => '1111111111111111111111111111111111111111',
+        ];
+
+        $this->createRequest($properties, $data + [
             'run_id' => 154,
             'run_number' => 158,
             'ref' => 'refs/heads/main',
             'ref_name' => 'main',
-            'sha' => '1111111111111111111111111111111111111111',
-        ]);
+        ], true);
 
-        $this->createRequest([
-            'minecraft_version' => '1.21',
-            'mod_id' => 'to_market',
-            'mod_version' => '2.0.0'
-        ], [
-            'repository' => 'joshmanisdabomb/to-market-to-market',
+        $this->createRequest($properties, $data + [
             'run_id' => 155,
             'run_number' => 159,
             'ref' => 'refs/tags/2.0.0',
             'ref_name' => '2.0.0',
-            'sha' => '1111111111111111111111111111111111111111',
-        ], true);
+        ], false);
+
+        $this->createRequest($properties, $data + [
+            'run_id' => 156,
+            'run_number' => 160,
+            'ref' => 'refs/heads/main',
+            'ref_name' => 'main'
+        ], false);
     }
 }
