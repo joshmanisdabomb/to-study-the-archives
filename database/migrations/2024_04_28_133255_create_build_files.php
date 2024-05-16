@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("path")->unique();
             $table->string("type")->nullable();
             $table->boolean("sources")->default(false);
+            $table->dateTimeTz('released_at');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -18,7 +18,7 @@ class LegacyModVersionSeeder extends Seeder
 
         DB::table('mod_versions')->upsert([
             [
-                'mod_version' => 'Update 1',
+                'name' => 'Update 1',
                 'mc_version' => '1.7.2',
                 'code' => 'u1',
                 'mod_id' => $mods['yam'],
@@ -30,7 +30,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'First version uploaded, reports itself as Beta 1.3.'
             ],
             [
-                'mod_version' => 'Update 1.1',
+                'name' => 'Update 1.1',
                 'mc_version' => '1.7.2',
                 'code' => 'u1.1',
                 'mod_id' => $mods['yam'],
@@ -42,7 +42,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Removed Mars and Mercury dimensions, replaced with \'Asmia\' dimension(?)'
             ],
             [
-                'mod_version' => 'Update 2',
+                'name' => 'Update 2',
                 'mc_version' => '1.7.2',
                 'code' => 'u2',
                 'mod_id' => $mods['yam'],
@@ -54,7 +54,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Added the tick mob to the wasteland, changed sounds of Amplislimes, spawn group size of Psycho Pig decreased.'
             ],
             [
-                'mod_version' => 'Update 3',
+                'name' => 'Update 3',
                 'mc_version' => '1.7.2',
                 'code' => 'u3',
                 'mod_id' => $mods['yam'],
@@ -66,7 +66,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Changed nuke mechanics, wasteland spawn rate reduced, added psychomeat.'
             ],
             [
-                'mod_version' => 'Update 3.1',
+                'name' => 'Update 3.1',
                 'mc_version' => '1.7.2',
                 'code' => 'u3.1',
                 'mod_id' => $mods['yam'],
@@ -78,7 +78,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Reworked nuclear missile model, plans to add more missile strikes.'
             ],
             [
-                'mod_version' => 'Update 4',
+                'name' => 'Update 4',
                 'mc_version' => '1.7.2',
                 'code' => 'u4',
                 'mod_id' => $mods['yam'],
@@ -90,7 +90,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Pills almost work, Missile Launch Pads render properly with GUI, Oil Buckets.'
             ],
             [
-                'mod_version' => 'Update 5',
+                'name' => 'Update 5',
                 'mc_version' => '1.7.2',
                 'code' => 'u5',
                 'mod_id' => $mods['yam'],
@@ -102,7 +102,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Adding computer functionality, new parts including motherboard.'
             ],
             [
-                'mod_version' => 'Update 6',
+                'name' => 'Update 6',
                 'mc_version' => '1.7.2',
                 'code' => 'u6',
                 'mod_id' => $mods['yam'],
@@ -114,7 +114,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Updated graphics, hiatus on missiles and computers, new mobs in the works.'
             ],
             [
-                'mod_version' => 'Update 7',
+                'name' => 'Update 7',
                 'mc_version' => '1.7.2',
                 'code' => 'u7',
                 'mod_id' => $mods['yam'],
@@ -126,7 +126,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Added Aerstone with different subtypes, added Sparkling Dragon, added rope blocks.'
             ],
             [
-                'mod_version' => 'Update 8',
+                'name' => 'Update 8',
                 'mc_version' => '1.7.2',
                 'code' => 'u8',
                 'mod_id' => $mods['yam'],
@@ -138,7 +138,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Added more potion effects and pill effects, added luck stat, fixed infinite arrow bug with aerstone repeater.'
             ],
             [
-                'mod_version' => 'Update 9',
+                'name' => 'Update 9',
                 'mc_version' => '1.7.2',
                 'code' => 'u9',
                 'mod_id' => $mods['yam'],
@@ -150,7 +150,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Added 2 mobs and bloodwood to the wasteland, new light affinity biome WIP, fly swatter & poop harvester, nod to kyle, hellfire. poison spikes.'
             ],
             [
-                'mod_version' => 'Update 9.1',
+                'name' => 'Update 9.1',
                 'mc_version' => '1.7.2',
                 'code' => 'u9.1',
                 'mod_id' => $mods['yam'],
@@ -162,7 +162,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Quick nerf to hellfire.'
             ],
             [
-                'mod_version' => 'Update 9.2',
+                'name' => 'Update 9.2',
                 'mc_version' => '1.7.2',
                 'code' => 'u9.2',
                 'mod_id' => $mods['yam'],
@@ -174,7 +174,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Texture change to light leaves, classic sounds fixed.'
             ],
             [
-                'mod_version' => 'Update 10',
+                'name' => 'Update 10',
                 'mc_version' => '1.7.2',
                 'code' => 'u10',
                 'mod_id' => $mods['yam'],
@@ -186,7 +186,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Light aura now contains light stone right off the bat, custom saplings and leaves now work, mobs die and leave light shards in light aura.'
             ],
             [
-                'mod_version' => 'Update 11',
+                'name' => 'Update 11',
                 'mc_version' => '1.7.2',
                 'code' => 'u11',
                 'mod_id' => $mods['yam'],
@@ -198,7 +198,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Light biomes no longer emit light due to lighting issues, different spawn eggs for different types of mobs (no longer limited to rainbow spawn eggs), work on winged creeper.'
             ],
             [
-                'mod_version' => 'Update 11.1',
+                'name' => 'Update 11.1',
                 'mc_version' => '1.7.2',
                 'code' => 'u11.1',
                 'mod_id' => $mods['yam'],
@@ -210,7 +210,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Added aura conversion enum system.'
             ],
             [
-                'mod_version' => 'Update 12',
+                'name' => 'Update 12',
                 'mc_version' => '1.7.2',
                 'code' => 'u12',
                 'mod_id' => $mods['yam'],
@@ -222,7 +222,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Added more light blocks. Changed some light block textures.'
             ],
             [
-                'mod_version' => 'Pre-Alpha',
+                'name' => 'Pre-Alpha',
                 'mc_version' => '1.10.2',
                 'code' => 'prealpha',
                 'mod_id' => $mods['aimagg'],
@@ -234,7 +234,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Added a creative tab with a custom sort system, and a directional facing test block. Starting work on a spreader constructor, which will allow you to build spreaders that infect the world.'
             ],
             [
-                'mod_version' => 'Alpha 0.1',
+                'name' => 'Alpha 0.1',
                 'mc_version' => '1.10.2',
                 'code' => 'a0.1',
                 'mod_id' => $mods['aimagg'],
@@ -246,7 +246,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Missile movement works, item and entity model for missiles.'
             ],
             [
-                'mod_version' => 'Alpha 0.1.1',
+                'name' => 'Alpha 0.1.1',
                 'mc_version' => '1.10.2',
                 'code' => 'a0.1.1',
                 'mod_id' => $mods['aimagg'],
@@ -258,7 +258,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Missile polish, trying to add particle effects. Spreader blocks suspended, work begun on Billie Blocks. Changed upgrade system to card system, launch pad now renders further away, nuclear explosions less laggy, fire missile model and nuclear waste model added.'
             ],
             [
-                'mod_version' => 'Alpha 0.2',
+                'name' => 'Alpha 0.2',
                 'mc_version' => '1.12',
                 'code' => 'a0.2',
                 'mod_id' => $mods['aimagg'],
@@ -270,7 +270,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'My first successful port, for 1.12. Added pills and making custom models look nice in all situations.'
             ],
             [
-                'mod_version' => 'Alpha 1.0.0',
+                'name' => 'Alpha 1.0.0',
                 'mc_version' => '1.12',
                 'code' => 'a1.0.0',
                 'mod_id' => $mods['aimagg'],
@@ -282,7 +282,7 @@ class LegacyModVersionSeeder extends Seeder
                 'changelog' => 'Everything renders correctly apart from launch pad.'
             ],
             [
-                'mod_version' => 'Alpha 1.0.1',
+                'name' => 'Alpha 1.0.1',
                 'mc_version' => '1.12',
                 'code' => 'a1.0.1',
                 'mod_id' => $mods['aimagg'],
@@ -296,7 +296,7 @@ No more modelling errors in logs.
 Updated unrefined uranium texture.'
             ],
             [
-                'mod_version' => 'Alpha 1.0.2',
+                'name' => 'Alpha 1.0.2',
                 'mc_version' => '1.12',
                 'code' => 'a1.0.2',
                 'mod_id' => $mods['aimagg'],
@@ -310,7 +310,7 @@ Client and server communicate so missile can be seen.
 Missile renders on client.'
             ],
             [
-                'mod_version' => 'Alpha 1.1.0',
+                'name' => 'Alpha 1.1.0',
                 'mc_version' => '1.12',
                 'code' => 'a1.1.0',
                 'mod_id' => $mods['aimagg'],
@@ -326,7 +326,7 @@ Added enum support in favour of just knowing what the numbers mean.
 Added shift click support for containers. They still need loads of work.'
             ],
             [
-                'mod_version' => 'Alpha 1.1.1',
+                'name' => 'Alpha 1.1.1',
                 'mc_version' => '1.12',
                 'code' => 'a1.1.1',
                 'mod_id' => $mods['aimagg'],
@@ -338,7 +338,7 @@ Added shift click support for containers. They still need loads of work.'
                 'changelog' => 'Quick language file fix.'
             ],
             [
-                'mod_version' => 'Alpha 1.2',
+                'name' => 'Alpha 1.2',
                 'mc_version' => '1.12',
                 'code' => 'a1.2',
                 'mod_id' => $mods['aimagg'],
@@ -353,7 +353,7 @@ Added pill effect GUI overlay and more pill effects work.
 Starting work on rainbow dimension.'
             ],
             [
-                'mod_version' => 'Alpha 1.3',
+                'name' => 'Alpha 1.3',
                 'mc_version' => '1.12',
                 'code' => 'a1.3',
                 'mod_id' => $mods['aimagg'],
@@ -368,7 +368,7 @@ Added spike blocks.
 Changed unlocalized name formats.'
             ],
             [
-                'mod_version' => 'Alpha 1.3.1',
+                'name' => 'Alpha 1.3.1',
                 'mc_version' => '1.12',
                 'code' => 'a1.3.1',
                 'mod_id' => $mods['aimagg'],
@@ -381,7 +381,7 @@ Changed unlocalized name formats.'
 Rainbow dimension has custom caves.'
             ],
             [
-                'mod_version' => 'Alpha 1.3.2',
+                'name' => 'Alpha 1.3.2',
                 'mc_version' => '1.12',
                 'code' => 'a1.3.2',
                 'mod_id' => $mods['aimagg'],
@@ -393,7 +393,7 @@ Rainbow dimension has custom caves.'
                 'changelog' => 'More reasonable gemstone ore generation.'
             ],
             [
-                'mod_version' => 'Alpha 1.4',
+                'name' => 'Alpha 1.4',
                 'mc_version' => '1.12',
                 'code' => 'a1.4',
                 'mod_id' => $mods['aimagg'],
@@ -406,7 +406,7 @@ Rainbow dimension has custom caves.'
 Overhauled blockstates, block models and item models to forge\'s system, deleting 35+ model files.'
             ],
             [
-                'mod_version' => 'Alpha 1.4.1',
+                'name' => 'Alpha 1.4.1',
                 'mc_version' => '1.12',
                 'code' => 'a1.4.1',
                 'mod_id' => $mods['aimagg'],
@@ -419,7 +419,7 @@ Overhauled blockstates, block models and item models to forge\'s system, deletin
 Starting work on neon ore.'
             ],
             [
-                'mod_version' => 'Alpha 1.5',
+                'name' => 'Alpha 1.5',
                 'mc_version' => '1.12.2',
                 'code' => 'a1.5',
                 'mod_id' => $mods['aimagg'],
@@ -434,7 +434,7 @@ Added classic grass, porkchops, and two sets of wool.
 Started work on computing.'
             ],
             [
-                'mod_version' => 'Alpha 1.6',
+                'name' => 'Alpha 1.6',
                 'mc_version' => '1.12.2',
                 'code' => 'a1.6',
                 'mod_id' => $mods['aimagg'],
@@ -454,7 +454,7 @@ Changed text colours of item tooltips.
 Updated textures of neon equipment.'
             ],
             [
-                'mod_version' => 'Alpha 1.6.1',
+                'name' => 'Alpha 1.6.1',
                 'mc_version' => '1.12.2',
                 'code' => 'a1.6.1',
                 'mod_id' => $mods['aimagg'],
@@ -467,7 +467,7 @@ Updated textures of neon equipment.'
 Updated textures for fortstone and rainbow pads.'
             ],
             [
-                'mod_version' => 'Pre-Alpha',
+                'name' => 'Pre-Alpha',
                 'mc_version' => '1.13.2',
                 'code' => 'prealpha',
                 'mod_id' => $mods['lcc_forge'],
@@ -479,7 +479,7 @@ Updated textures for fortstone and rainbow pads.'
                 'changelog' => 'Pretty empty with nothing added.'
             ],
             [
-                'mod_version' => 'Alpha 0.1',
+                'name' => 'Alpha 0.1',
                 'mc_version' => '1.13.2',
                 'code' => 'a0.1',
                 'mod_id' => $mods['lcc_forge'],
@@ -494,7 +494,7 @@ Textures, models and blockstates working!
 Implemented all test blocks apart from connected.'
             ],
             [
-                'mod_version' => 'Alpha 0.2',
+                'name' => 'Alpha 0.2',
                 'mc_version' => '1.13.2',
                 'code' => 'a0.2',
                 'mod_id' => $mods['lcc_forge'],
@@ -509,7 +509,7 @@ Added entity loading and a nuclear explosion entity.
 Updated all textures to fit 1.14 style. Added enriched uranium resource.'
             ],
             [
-                'mod_version' => 'Alpha 0.3',
+                'name' => 'Alpha 0.3',
                 'mc_version' => '1.13.2',
                 'code' => 'a0.3',
                 'mod_id' => $mods['lcc_forge'],
@@ -523,7 +523,7 @@ Added nuclear debris and fire to nuclear main explosion.
 Generating ores in the world.'
             ],
             [
-                'mod_version' => 'Alpha 0.4',
+                'name' => 'Alpha 0.4',
                 'mc_version' => '1.14.3',
                 'code' => 'a0.4',
                 'mod_id' => $mods['lcc_forge'],
@@ -543,7 +543,7 @@ Better way to sort and add empty space to item group.
 Implemented heart items and containers. Sync heart data using packets and fixed heart using desync.'
             ],
             [
-                'mod_version' => 'Alpha 0.5',
+                'name' => 'Alpha 0.5',
                 'mc_version' => '1.14.4',
                 'code' => 'a0.5',
                 'mod_id' => $mods['lcc_forge'],
@@ -565,7 +565,7 @@ Finished connected texture blocks.
 Welcome spreader blocks and spreader interface to the mod. Spreader interface now change the world\'s global capability.'
             ],
             [
-                'mod_version' => 'Alpha 1.0',
+                'name' => 'Alpha 1.0',
                 'mc_version' => '1.14.4',
                 'code' => 'a1.0',
                 'mod_id' => $mods['lcc_forge'],
@@ -585,7 +585,7 @@ Added bounce pads and updated working for multiplayer. Particles trigger in sing
 Added hydrated soul sand and rewrote my tab sorting system from 3 years ago!'
             ],
             [
-                'mod_version' => 'Beta 1.0',
+                'name' => 'Beta 1.0',
                 'mc_version' => '1.15.2',
                 'code' => 'b1.0',
                 'mod_id' => $mods['lcc_forge'],
@@ -606,7 +606,7 @@ Fix to double classic chest and hopper interaction.
 Added loot table, lang, block state, item model, tag, advancement data generator.'
             ],
             [
-                'mod_version' => '0.1.0',
+                'name' => '0.1.0',
                 'mc_version' => '20w51a',
                 'code' => '0.1.0',
                 'mod_id' => $mods['lcc'],
@@ -629,7 +629,7 @@ To allow running in real environments: No longer use reflection for thing direct
 Time rift functionality and ruby recipes.'
             ],
             [
-                'mod_version' => '0.1.1',
+                'name' => '0.1.1',
                 'mc_version' => '20w51a',
                 'code' => '0.1.1',
                 'mod_id' => $mods['lcc'],
@@ -646,7 +646,7 @@ Time rift model.
 Added topaz and reworked gems into tiers.'
             ],
             [
-                'mod_version' => '0.1.2',
+                'name' => '0.1.2',
                 'mc_version' => '20w51a',
                 'code' => '0.1.2',
                 'mod_id' => $mods['lcc'],
@@ -660,7 +660,7 @@ Added pumice and rhyolite to topaz geode casing.
 Added textures and functionality to many classic blocks previously added.'
             ],
             [
-                'mod_version' => '0.2.0',
+                'name' => '0.2.0',
                 'mc_version' => '20w51a',
                 'code' => '0.2.0',
                 'mod_id' => $mods['lcc'],
@@ -674,7 +674,7 @@ Added classic chest, nether reactor, crying obsidian.
 Fixed topaz geode casing not generating enough topaz.'
             ],
             [
-                'mod_version' => '0.2.1',
+                'name' => '0.2.1',
                 'mc_version' => '20w51a',
                 'code' => '0.2.1',
                 'mod_id' => $mods['lcc'],
@@ -690,7 +690,7 @@ Fixed language file and data generation issues.
 Changed texture for rhyolite.'
             ],
             [
-                'mod_version' => '0.2.2',
+                'name' => '0.2.2',
                 'mc_version' => '20w51a',
                 'code' => '0.2.2',
                 'mod_id' => $mods['lcc'],
@@ -704,7 +704,7 @@ Fixed server crash with client packets such as bounce pad extensions.
 Fixed furnace recipes for smelting items.'
             ],
             [
-                'mod_version' => '0.3.0',
+                'name' => '0.3.0',
                 'mc_version' => '20w51a',
                 'code' => '0.3.0',
                 'mod_id' => $mods['lcc'],
@@ -717,7 +717,7 @@ Fixed furnace recipes for smelting items.'
 Added heavy uranium.'
             ],
             [
-                'mod_version' => '0.3.1',
+                'name' => '0.3.1',
                 'mc_version' => '20w51a',
                 'code' => '0.3.1',
                 'mod_id' => $mods['lcc'],
@@ -734,7 +734,7 @@ Cogs now drop correct amount of items when broken by the game.
 Update to latest Fabric.'
             ],
             [
-                'mod_version' => '0.3.2',
+                'name' => '0.3.2',
                 'mc_version' => '21w03a',
                 'code' => '0.3.2',
                 'mod_id' => $mods['lcc'],
@@ -748,7 +748,7 @@ Added silicon for solar panel recipe and geothermal power.
 Added energy bank and batteries for storing power.'
             ],
             [
-                'mod_version' => '0.4.0',
+                'name' => '0.4.0',
                 'mc_version' => '21w06a',
                 'code' => '0.4.0',
                 'mod_id' => $mods['lcc'],
@@ -761,7 +761,7 @@ Added energy bank and batteries for storing power.'
 Using nightly Cardinal Components.'
             ],
             [
-                'mod_version' => '0.4.1',
+                'name' => '0.4.1',
                 'mc_version' => '21w06a',
                 'code' => '0.4.1',
                 'mod_id' => $mods['lcc'],
@@ -777,7 +777,7 @@ Atomic bombs and nuclear explosions now load chunks.
 Fix for server crash on radiation increase.'
             ],
             [
-                'mod_version' => '0.4.2',
+                'name' => '0.4.2',
                 'mc_version' => '21w08b',
                 'code' => '0.4.2',
                 'mod_id' => $mods['lcc'],
@@ -796,7 +796,7 @@ Blocks, items and nullable blockitems now working with new directory system.
 Race advancement for nuclear detonation. Fixed bug with nuclear explosion log not displaying name of player.'
             ],
             [
-                'mod_version' => '0.4.3',
+                'name' => '0.4.3',
                 'mc_version' => '21w11a',
                 'code' => '0.4.3',
                 'mod_id' => $mods['lcc'],
@@ -816,7 +816,7 @@ Added custom heart type damage sounds and fixed custom heart type damage overlay
 Updated to 21w11a.'
             ],
             [
-                'mod_version' => '0.4.4',
+                'name' => '0.4.4',
                 'mc_version' => '21w14a',
                 'code' => '0.4.4',
                 'mod_id' => $mods['lcc'],
@@ -841,7 +841,7 @@ Fixed bug with radiation not healing and large amounts not carrying over to the 
 Update to 21w14a.'
             ],
             [
-                'mod_version' => '0.5.0',
+                'name' => '0.5.0',
                 'mc_version' => '21w14a',
                 'code' => '0.5.0',
                 'mod_id' => $mods['lcc'],
@@ -883,7 +883,7 @@ Split lcc-hooks into separate module.
 Content datagen now launching and matches 0.4.4 datagen.'
             ],
             [
-                'mod_version' => '0.5.1',
+                'name' => '0.5.1',
                 'mc_version' => '1.19.2',
                 'code' => '0.5.1',
                 'mod_id' => $mods['lcc'],
@@ -927,7 +927,7 @@ Added fly egg item as Rotwitch drop
 Added Spawning Pit block'
             ],
             [
-                'mod_version' => '0.5.2',
+                'name' => '0.5.2',
                 'mc_version' => '1.19.2',
                 'code' => '0.5.2',
                 'mod_id' => $mods['lcc'],

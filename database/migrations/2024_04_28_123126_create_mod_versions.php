@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('commit')->nullable()->unique();
             $table->string('title')->nullable();
             $table->text('changelog');
-            $table->timestamp('released_at')->nullable();
+            $table->dateTimeTz('released_at')->nullable();
             $table->timestamps();
             $table->unique(['mod_id', 'mod_version']);
         });

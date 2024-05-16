@@ -40,25 +40,28 @@ class LegacyBuildSeeder extends Seeder
             'mc_version' => $version->mc_version,
             'ref_name' => $version->repository_branch,
             'commit' => $version->commit,
+            'released_at' => $version->released_at,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-        ])->jsonSerialize(), ['commit'], ['nightly', 'mc_version', 'mod_version', 'mod_identifier', 'repository', 'ref_name', 'updated_at']);
+        ])->jsonSerialize(), ['commit'], ['nightly', 'mc_version', 'mod_version', 'mod_identifier', 'repository', 'ref_name', 'released_at', 'updated_at']);
 
         DB::table('build_files')->upsert($versions->map(fn($version) => [
             'build_id' => DB::table('builds')->where(['commit' => $version->commit])->first('id')->id,
             'path' => 'builds/' . $version->short . '-' . $version->mc_version . '-' . $version->mod_version . '.jar',
             'type' => null,
             'sources' => false,
+            'released_at' => $version->released_at,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-        ])->jsonSerialize(), ['path'], ['build_id', 'path', 'type', 'sources', 'updated_at']);
+        ])->jsonSerialize(), ['path'], ['build_id', 'path', 'type', 'sources', 'released_at', 'updated_at']);
         DB::table('build_files')->upsert($versions->filter(fn($version) => $version->sources)->map(fn($version) => [
             'build_id' => DB::table('builds')->where(['commit' => $version->commit])->first('id')->id,
             'path' => 'builds/' . $version->short . '-' . $version->mc_version . '-' . $version->mod_version . '-sources.jar',
             'type' => null,
             'sources' => true,
+            'released_at' => $version->released_at,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-        ])->jsonSerialize(), ['path'], ['build_id', 'path', 'type', 'sources', 'updated_at']);
+        ])->jsonSerialize(), ['path'], ['build_id', 'path', 'type', 'sources', 'released_at', 'updated_at']);
     }
 }

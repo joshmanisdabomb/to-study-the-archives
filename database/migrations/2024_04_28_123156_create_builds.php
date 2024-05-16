@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('run_number')->nullable();
             $table->string('ref_name');
             $table->string('commit')->unique();
+            $table->dateTimeTz('released_at');
             $table->timestamps();
             $table->softDeletes();
         });

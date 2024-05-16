@@ -24,6 +24,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null deleted_at
  *
  * @property-read \App\Models\Article[] articles
+ * @property-read \App\Models\Build[] builds
+ * @property-read \App\Models\BuildFile[] files
+ * @property-read \App\Models\Mod[] mods
+ * @property-read \App\Models\ModVersion[] versions
  */
 class ContentUpdate extends Model
 {
@@ -48,5 +52,21 @@ class ContentUpdate extends Model
 
     public function articles() {
         return $this->hasMany(Article::class, 'content_id');
+    }
+
+    public function builds() {
+        return $this->hasMany(Build::class, 'content_id');
+    }
+
+    public function files() {
+        return $this->hasMany(BuildFile::class, 'content_id');
+    }
+
+    public function mods() {
+        return $this->hasMany(Mod::class, 'content_id');
+    }
+
+    public function version() {
+        return $this->hasMany(ModVersion::class, 'content_id');
     }
 }

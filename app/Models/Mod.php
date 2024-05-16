@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,19 +18,47 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean legacy
  * @property string repository
  * @property string repository_branch
- * @property boolean sources
  * @property boolean tags
+ * @property boolean sources
+ * @property boolean modrinth
+ * @property boolean curseforge
+ * @property int|null content_id
  *
  * @property-read \App\Models\ModVersion[] versions
  * @property-read \App\Models\ModVersion|null latest
+ * @property-read \App\Models\Build[] builds
+ * @property-read \App\Models\ContentUpdate|null contentUpdate
+ *
+ * @property-read string|null icon
  */
 class Mod extends Model
 {
+    private static array $iconCache = [];
+
     public function versions() {
         return $this->hasMany(ModVersion::class, 'mod_id');
     }
 
     public function latest() {
         return $this->hasOne(ModVersion::class, 'mod_id')->whereNotNull('released_at')->latest('released_at');
+    }
+
+    public function builds() {
+        return $this->hasMany(Build::class, 'mod_identifier', 'identifier');
+    }
+
+    public function contentUpdate() {
+        return $this->belongsTo(ContentUpdate::class, 'content_id');
+    }
+
+    public function icon(): Attribute {
+        return Attribute::make(function ($value, array $attributes) {
+            $identifier = $attributes['identifier'];
+            if (!isset(static::$iconCache[$identifier])) {
+                $icon = "resources/img/icons/{$identifier}_512.png";
+                static::$iconCache[$identifier] = file_exists(base_path($icon)) ? $icon : null;
+            }
+            return static::$iconCache[$identifier];
+        });
     }
 }

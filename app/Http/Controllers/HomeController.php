@@ -8,7 +8,7 @@ use Illuminate\View\View;
 class HomeController extends Controller
 {
     public function index(): View {
-        $mods = Mod::with('latest.build.files')->get()->keyBy('identifier');
+        $mods = Mod::with('latest.build.files')->orderBy('name')->get()->keyBy('identifier');
 
         return view('home', compact('mods'));
     }

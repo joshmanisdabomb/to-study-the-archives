@@ -9,7 +9,7 @@
     <body class="app bg-slate-50">
         @include('layouts.nav')
         @include('layouts.header')
-        <div class="max-w-screen-3xl mx-auto p-5 px-10 gap-5 flex items-start lg:flex-row-reverse flex-col items-stretch lg:items-start">
+        <div class="max-w-screen-3xl mx-auto p-5 md:px-10 gap-5 flex items-start lg:flex-row-reverse flex-col items-stretch lg:items-start">
             @hasSection('aside')
                 <div class="flex-initial 2xl:w-1/5 lg:w-1/4 bg-white p-4 rounded-lg shadow-lg">
                     @yield('aside')
