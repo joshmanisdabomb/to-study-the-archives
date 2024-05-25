@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\BuildFile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
@@ -16,7 +17,6 @@ class BuildControllerTest extends TestCase
     protected function setUp() : void {
         parent::setUp();
 
-        $this->withoutExceptionHandling();
         Storage::fake();
     }
 
@@ -54,13 +54,17 @@ class BuildControllerTest extends TestCase
             $response->assertStatus(200);
             $response->assertJson($expected);
 
-            $files = $expected['files'];
-            unset($expected['files']);
             $this->assertDatabaseCount('builds', 1);
-            $this->assertDatabaseHas('builds', $expected);
-            $this->assertDatabaseCount('build_files', count($files));
-            foreach ($files as $file) {
+            $this->assertDatabaseHas('builds', array_diff_key($expected, array_flip(['files'])));
+            $this->assertDatabaseCount('build_files', count($expected['files']));
+            foreach ($expected['files'] as $file) {
                 $this->assertDatabaseHas('build_files', $file);
+
+                $bf = BuildFile::firstWhere($file);
+                $this->assertTrue(Storage::exists($bf->path));
+
+                $var = $bf->sources ? 'source' : $bf->type;
+                $this->assertSame(Storage::get($bf->path), $$var->get());
             }
         }
 

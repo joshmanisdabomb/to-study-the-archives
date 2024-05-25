@@ -11,6 +11,7 @@ use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use ZipArchive;
@@ -37,7 +38,7 @@ class ContentController extends Controller
         $lang = $request->file('lang');
         $images = $request->file('images');
 
-        $update = ContentUpdate::create([
+        $attributes = [
             'body' => $body,
             'meta' => $meta,
             'content' => $content instanceof UploadedFile ? $content->store('content') : null,
@@ -46,39 +47,13 @@ class ContentController extends Controller
             'mod_identifier' => $mod_id,
             'mod_version' => $mod_version,
             'mc_version' => $mc_version,
-        ]);
+        ];
+        $update = DB::transaction(function () use ($attributes) {
+            $update = ContentUpdate::create($attributes);
+            $update->commit();
 
-        if ($content instanceof UploadedFile) {
-            $zip = new ZipArchive();
-            $zip->open($content->getPathname());
-            for ($i = 0; $entry = $zip->statIndex($i); $i++) {
-                $contents = $zip->getFromIndex($i);
-
-                $namespace = dirname($entry['name']);
-                $identifier = basename($entry['name'], '.json');
-
-                $update->articles()->create([
-                    'namespace' => $namespace,
-                    'identifier' => $identifier,
-                    'data' => json_decode($contents, true),
-                ]);
-            }
-            $zip->close();
-
-            $update->articles()->createMany(Article::query()
-                ->select(['namespace', 'identifier'])
-                ->where(fn (Builder $query) => $query
-                    ->select(new Expression("a.data IS NOT NULL AND a.content_id < $update->id"))
-                    ->from('articles AS a')
-                    ->where(['a.namespace' => new Expression('articles.namespace'), 'a.identifier' => new Expression('articles.identifier')])
-                    ->orderByDesc('a.content_id')
-                    ->limit(1)
-                , true)
-                ->where(['namespace' => $mod_id])
-                ->groupBy(['namespace', 'identifier'])->get()->toArray());
-        } else {
-            $content = null;
-        }
+            return $update;
+        });
 
         $update->load(['articles']);
         return response()->json($update);
