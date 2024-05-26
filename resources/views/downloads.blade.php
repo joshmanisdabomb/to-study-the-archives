@@ -31,6 +31,7 @@
                         <th scope="col" class="w-16"></th>
                         <th scope="col" class="px-6 py-3 lg:w-px lg:whitespace-nowrap">Mod</th>
                         <th scope="col" class="px-6 py-3">Version</th>
+                        <th scope="col" class="px-6 py-3">Branch</th>
                         <th scope="col" class="px-6 py-3">Release</th>
                         <th scope="col" class="px-6 py-3">Uploaded</th>
                         <th scope="col" class="px-6 py-3">Download</th>
@@ -40,21 +41,28 @@
                     @foreach ($all as $build)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <td class="relative w-16">
-                                @if ($build->mod->icon)
+                                @if ($build->mod?->icon)
                                     <img src="{{ Vite::asset($build->mod->icon) }}" alt="Icon for {{ $build->mod->name }}" class="absolute ps-6 top-0 left-0 w-full h-full object-contain">
                                 @endif
                             </td>
                             <td class="px-6 py-4 lg:w-px lg:whitespace-nowrap">
-                                {{ $build->mod->name }}
+                                {{ $build->mod?->name ?: $build->mod_identifier }}
                             </td>
                             <td class="px-6 py-4">
-                                @if ($build->version->title)
-                                    <span class="border-dashed border-black border-b" title="{{ $build->version->title }}">
+                                @if ($build->version)
+                                    <span
+                                        @if ($build->version->title)
+                                            class="border-dashed border-black border-b" title="{{ $build->version->title }}"
+                                        @endif
+                                    >
+                                        {{ $build->version->name }}
+                                    </span>
                                 @else
-                                    <span>
+                                    {{ $build->mod_version }}
                                 @endif
-                                    {{ $build->version->name }}
-                                </span>
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ (!$build->nightly && $build->mod) ? $build->mod->repository_branch : $build->ref_name }}
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-x-1">
