@@ -22,7 +22,7 @@ jobs:
 
     - name: Add Known Host
       run: |
-        ssh-keyscan -H "$SSH_IP" >> ~/.ssh/known_hosts
+        ssh-keyscan -H "$SSH_IP"
       env:
         SSH_IP: ${{ secrets.PRODUCTION_IP }}
 
