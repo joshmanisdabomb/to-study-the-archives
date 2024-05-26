@@ -72,7 +72,7 @@ class LegacyModVersionSeeder extends Seeder
                 'mod_id' => $mods['yam'],
                 'title' => null,
                 'commit' => '14a72db329c665199e10a42c30c4f7cdd1350385',
-                'released_at' => Carbon::create(2015, 2, 22, 20, 41, 01, 'UTC'),
+                'released_at' => Carbon::create(2015, 2, 22, 20, 41, 1, 'UTC'),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'changelog' => 'Reworked nuclear missile model, plans to add more missile strikes.'
@@ -276,7 +276,7 @@ class LegacyModVersionSeeder extends Seeder
                 'mod_id' => $mods['aimagg'],
                 'title' => null,
                 'commit' => '927612e2f4dcbe119488613c147b57cc733c4b50',
-                'released_at' => Carbon::create(2017, 7, 27, 3, 22, 02, '+0100'),
+                'released_at' => Carbon::create(2017, 7, 27, 3, 22, 2, '+0100'),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'changelog' => 'Everything renders correctly apart from launch pad.'
@@ -332,7 +332,7 @@ Added shift click support for containers. They still need loads of work.'
                 'mod_id' => $mods['aimagg'],
                 'title' => null,
                 'commit' => '6dbf5f5bacc5445a7c241fcf6a003b7cf3defa9a',
-                'released_at' => Carbon::create(2017, 8, 2, 22, 26, 05, '+0100'),
+                'released_at' => Carbon::create(2017, 8, 2, 22, 26, 5, '+0100'),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'changelog' => 'Quick language file fix.'

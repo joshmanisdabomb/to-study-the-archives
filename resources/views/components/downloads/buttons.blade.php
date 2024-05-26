@@ -14,7 +14,7 @@
         </div>
     @endif
     <div class="flex gap-x-2">
-        @foreach ($build->files as $file)
+        @foreach ($build?->files ?: [] as $file)
             @if ($file->sources) @continue @endif
             <a href="{{ route('download', $file) }}" class="svg-btn flex gap-x-1.5 px-3 py-2 text-white transition-colors duration-150 rounded-lg focus:outline-none focus:shadow-outline focus:ring-4 {{ $button }}">
                 @if ($file->type)

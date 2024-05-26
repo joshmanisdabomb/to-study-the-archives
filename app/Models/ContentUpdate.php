@@ -122,7 +122,7 @@ class ContentUpdate extends Model
 
             $files = [];
             foreach ($b['files'] ?? [] as $f) {
-                $file = $build->files()->updateOrCreate(['type' => $f['type'], 'sources' => $f['sources']], array_replace([
+                $file = $build->files()->updateOrCreate(['type' => $f['type'] ?? null, 'sources' => $f['sources'] ?? null], array_replace([
                     'released_at' => $build->released_at,
                 ], $f, $association));
                 $files[] = $file->id;

@@ -10,7 +10,7 @@
             <div class="flex-1 flex flex-col justify-center xl:text-left">
                 <h3 id="{{ (($type ?? null) ? ($type . '-') : '') }}" class="font-medium text-2xl mb-2 xl:mb-1">{{ $mod->name }}</h3>
                 <p class="font-light">
-                    {{ $mod->latest->mod_version }} for Minecraft {{ $mod->latest->mc_version }}, released
+                    {{ $mod->latest->name }} for Minecraft {{ $mod->latest->mc_version }}, released
                     <span class="border-dashed border-black border-b" title="{{ $mod->latest->released_at->format('d/m/Y H:i:s') }}">{{ $mod->latest->released_at->diffForHumans() }}</span>.
                 </p>
             </div>
