@@ -5,39 +5,25 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Production]
     
     environment: 
       name: production
       url: https://to.jidb.net
 
+    defaults:
+      run:
+        working-directory: ${{ secrets.PRODUCTION_DIR }}
+
     steps:
-    - name: Store SSH Key
-      run: |
-        mkdir -p ~/.ssh
-        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.PRODUCTION_SSH }}
-
-    - name: Add Known Host
-      run: |
-        ssh-keyscan -H "$SSH_IP"
-      env:
-        SSH_IP: ${{ secrets.PRODUCTION_IP }}
-
     - name: Update Code
-      run: |
-        ssh ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_IP }} "cd ${{ secrets.PRODUCTION_DIR }} && git pull"
+      run: git pull
 
     - name: Update Composer Packages
-      run: |
-        ssh ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_IP }} "cd ${{ secrets.PRODUCTION_DIR }} && php83 /usr/local/bin/composer install --no-interaction"
+      run: php83 /usr/local/bin/composer install --no-interaction
 
     - name: Run Migrations
-      run: |
-        ssh ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_IP }} "cd ${{ secrets.PRODUCTION_DIR }} && php83 artisan migrate --force"
+      run: php83 artisan migrate --force
 
     - name: Build CSS and JS
-      run: |
-        ssh ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_IP }} "cd ${{ secrets.PRODUCTION_DIR }} && npm run build"
+      run: npm run build
