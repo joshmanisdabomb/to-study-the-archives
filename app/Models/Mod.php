@@ -35,6 +35,30 @@ class Mod extends Model
 {
     private static array $iconCache = [];
 
+    protected $fillable = [
+        'identifier',
+        'name',
+        'short',
+        'legacy',
+        'repository',
+        'repository_branch',
+        'tags',
+        'sources',
+        'modrinth',
+        'curseforge',
+        'content_id',
+        'created_at',
+        'updated_at',
+    ];
+
+    protected $casts = [
+        'legacy' => 'boolean',
+        'tags' => 'boolean',
+        'sources' => 'boolean',
+        'modrinth' => 'boolean',
+        'curseforge' => 'boolean',
+    ];
+
     public function versions() {
         return $this->hasMany(ModVersion::class, 'mod_id');
     }

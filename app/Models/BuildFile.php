@@ -34,8 +34,8 @@ class BuildFile extends Model
         'type',
         'sources',
         'content_id',
-        'created_at',
         'released_at',
+        'created_at',
     ];
 
     protected $casts = [

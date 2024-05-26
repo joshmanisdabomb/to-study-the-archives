@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Awobaz\Compoships\Compoships;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -50,6 +51,8 @@ class Build extends Model
         'run_number',
         'ref_name',
         'commit',
+        'content_id',
+        'released_at',
         'created_at',
     ];
 

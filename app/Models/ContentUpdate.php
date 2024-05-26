@@ -73,7 +73,7 @@ class ContentUpdate extends Model
         return $this->hasMany(Mod::class, 'content_id');
     }
 
-    public function version() {
+    public function versions() {
         return $this->hasMany(ModVersion::class, 'content_id');
     }
 
@@ -83,13 +83,14 @@ class ContentUpdate extends Model
     }
 
     public function commitMeta(): void {
+        $association = ['content_id' => $this->id];
         foreach ($this->meta['mods'] ?? [] as $identifier => $m) {
             $attributes = ['identifier' => $identifier];
             if (!$m) {
                 Mod::where($attributes)->delete();
                 continue;
             }
-            $mod = Mod::updateOrCreate($attributes, $m);
+            $mod = Mod::updateOrCreate($attributes, array_replace($attributes, $m, $association));
 
             foreach ($m['versions'] ?? [] as $code => $v) {
                 $attributes = ['code' => $code];
@@ -97,7 +98,9 @@ class ContentUpdate extends Model
                     $mod->versions()->where($attributes)->delete();
                     continue;
                 }
-                $mod->versions()->updateOrCreate($attributes, $v);
+                $mod->versions()->updateOrCreate($attributes, array_replace($attributes, [
+                    'name' => $code,
+                ], $v, $association));
             }
         }
         foreach ($this->meta['builds'] ?? [] as $sha => $b) {
@@ -106,11 +109,15 @@ class ContentUpdate extends Model
                 Build::where($attributes)->delete();
                 continue;
             }
-            $build = Build::updateOrCreate($attributes, $b);
+            $build = Build::updateOrCreate($attributes, array_replace($attributes, [
+                'nightly' => false,
+            ], $b, $association));
 
             $files = [];
             foreach ($b['files'] ?? [] as $f) {
-                $file = $build->files()->updateOrCreate(['type' => $f['type'], 'sources' => $f['sources']], $f);
+                $file = $build->files()->updateOrCreate(['type' => $f['type'], 'sources' => $f['sources']], array_replace([
+                    'released_at' => $build->released_at,
+                ], $f, $association));
                 $files[] = $file->id;
             }
             $build->files()->whereNotIn('id', $files)->delete();

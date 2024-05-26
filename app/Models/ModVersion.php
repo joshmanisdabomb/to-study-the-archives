@@ -31,6 +31,19 @@ class ModVersion extends Model
 {
     use Compoships;
 
+    protected $fillable = [
+        'name',
+        'mc_version',
+        'code',
+        'commit',
+        'title',
+        'changelog',
+        'released_at',
+        'content_id',
+        'created_at',
+        'updated_at',
+    ];
+
     protected $casts = [
         'released_at' => 'datetime',
     ];
