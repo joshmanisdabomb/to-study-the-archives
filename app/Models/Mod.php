@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Mod
@@ -23,6 +24,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean modrinth
  * @property boolean curseforge
  * @property int|null content_id
+ * @property \Carbon\Carbon|null created_at
+ * @property \Carbon\Carbon|null updated_at
  *
  * @property-read \App\Models\ModVersion[] versions
  * @property-read \App\Models\ModVersion|null latest

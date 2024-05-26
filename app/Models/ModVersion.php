@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string changelog
  * @property int|null content_id
  * @property \Carbon\Carbon|null released_at
+ * @property \Carbon\Carbon|null created_at
+ * @property \Carbon\Carbon|null updated_at
  *
  * @property-read \App\Models\Mod mod
  * @property-read \App\Models\Build build

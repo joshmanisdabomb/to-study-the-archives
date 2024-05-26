@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Http\UploadedFile;
@@ -38,6 +39,8 @@ use ZipArchive;
  */
 class ContentUpdate extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'body',
         'meta',
@@ -87,7 +90,9 @@ class ContentUpdate extends Model
         foreach ($this->meta['mods'] ?? [] as $identifier => $m) {
             $attributes = ['identifier' => $identifier];
             if (!$m) {
-                Mod::where($attributes)->delete();
+                $delete = Mod::with(['versions'])->firstWhere($attributes);
+                $delete?->versions()->delete();
+                $delete?->delete();
                 continue;
             }
             $mod = Mod::updateOrCreate($attributes, array_replace($attributes, $m, $association));
@@ -106,7 +111,9 @@ class ContentUpdate extends Model
         foreach ($this->meta['builds'] ?? [] as $sha => $b) {
             $attributes = ['commit' => $sha];
             if (!$b) {
-                Build::where($attributes)->delete();
+                $delete = Build::with(['files'])->firstWhere($attributes);
+                $delete?->files()->delete();
+                $delete?->delete();
                 continue;
             }
             $build = Build::updateOrCreate($attributes, array_replace($attributes, [

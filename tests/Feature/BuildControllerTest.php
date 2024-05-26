@@ -56,7 +56,7 @@ class BuildControllerTest extends TestCase
 
             $this->assertDatabaseCount('builds', 1);
             $this->assertDatabaseHas('builds', array_diff_key($expected, array_flip(['files'])));
-            $this->assertDatabaseCount('build_files', count($expected['files']));
+            $this->assertSame(BuildFile::count(), count($expected['files']));
             foreach ($expected['files'] as $file) {
                 $this->assertDatabaseHas('build_files', $file);
 
