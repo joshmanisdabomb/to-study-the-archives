@@ -79,7 +79,7 @@
                                 <span class="border-dashed border-black border-b" title="{{ $build->released_at->format('d/m/Y H:i:s') }}">{{ $build->released_at->diffForHumans() }}</span>
                             </td>
                             <td class="px-6 py-4">
-                                <x-downloads.buttons :build="$build" label="" justify="start" :button="$build->nightly ? 'bg-red-600 hover:bg-red-700 active:bg-red-800 focus:ring-red-200' : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 focus:ring-blue-200'"></x-downloads.buttons>
+                                <x-downloads.buttons :build="$build" sources label="" justify="start" :button="$build->nightly ? 'bg-red-600 hover:bg-red-700 active:bg-red-800 focus:ring-red-200' : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 focus:ring-blue-200'"></x-downloads.buttons>
                             </td>
                         </tr>
                     @endforeach
