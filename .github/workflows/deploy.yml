@@ -9,11 +9,11 @@ jobs:
     
     environment: 
       name: production
-      url: https://to.jidb.net
+      url: "${{ secrets.PRODUCTION_URL }}"
 
     defaults:
       run:
-        working-directory: ${{ secrets.PRODUCTION_DIR }}
+        working-directory: "${{ secrets.PRODUCTION_DIR }}"
 
     steps:
     - name: Update Code
