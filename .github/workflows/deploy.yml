@@ -8,21 +8,21 @@ jobs:
     runs-on: [self-hosted, Production]
     
     environment: 
-      name: production
+      name: Production
       url: https://to.jidb.net
 
-    steps:
-    - name: Change Directory
-      run: "cd ${{ secrets.PRODUCTION_DIR }}"
-      
+    steps:      
     - name: Update Code
-      run: git pull
+      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} git pull"
 
     - name: Update Composer Packages
-      run: php83 /usr/local/bin/composer install --no-interaction
+      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} php83 /usr/local/bin/composer install --no-interaction"
 
     - name: Run Migrations
-      run: php83 artisan migrate --force
+      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} php83 artisan migrate --force"
 
+    - name: Update NPM Packages
+      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} npm install"
+      
     - name: Build CSS and JS
-      run: npm run build
+      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} npm run build"
