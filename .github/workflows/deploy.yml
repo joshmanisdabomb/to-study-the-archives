@@ -13,16 +13,16 @@ jobs:
 
     steps:      
     - name: Update Code
-      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} git pull"
+      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} /opt/deploy/git/pull.sh"
 
     - name: Update Composer Packages
-      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} php83 /usr/local/bin/composer install --no-interaction"
+      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} /opt/deploy/composer/install.sh"
 
     - name: Run Migrations
-      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} php83 artisan migrate --force"
+      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} /opt/deploy/artisan/migrate.sh"
 
     - name: Update NPM Packages
-      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} npm install"
+      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} /opt/deploy/npm/install.sh"
       
     - name: Build CSS and JS
-      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} npm run build"
+      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} /opt/deploy/npm/build.sh"
