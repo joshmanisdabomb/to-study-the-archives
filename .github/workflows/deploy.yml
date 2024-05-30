@@ -1,0 +1,28 @@
+name: Deploy to Production
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, Production]
+    
+    environment: 
+      name: Production
+      url: https://to.jidb.net
+
+    steps:      
+    - name: Update Code
+      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} /opt/deploy/git/pull.sh"
+
+    - name: Update Composer Packages
+      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} /opt/deploy/composer/install.sh"
+
+    - name: Run Migrations
+      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} /opt/deploy/artisan/migrate.sh"
+
+    - name: Update NPM Packages
+      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} /opt/deploy/npm/install.sh"
+      
+    - name: Build CSS and JS
+      run: "cd ${{ secrets.PRODUCTION_DIR }} && sudo -u ${{ secrets.PRODUCTION_USER }} /opt/deploy/npm/build.sh"
