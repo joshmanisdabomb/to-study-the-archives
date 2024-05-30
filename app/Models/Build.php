@@ -76,7 +76,11 @@ class Build extends Model
     }
 
     public function files() {
-        return $this->hasMany(BuildFile::class, 'build_id');
+        return $this->hasMany(BuildFile::class, 'build_id')
+            ->orderBy('sources')
+            ->orderByDesc(new Expression('type = "fabric"'))
+            ->orderByDesc(new Expression('type = "quilt"'))
+            ->orderByDesc(new Expression('type = "forge"'));
     }
 
     public function contentUpdate() {

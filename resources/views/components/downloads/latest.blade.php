@@ -9,6 +9,6 @@
         <div class="flex-0 flex flex-col justify-center">
             <h3 id="{{ (($type ?? null) ? ($type . '-') : '') . $build->mod->identifier }}" class="font-medium text-lg">{{ $build->mod->name }}</h3>
         </div>
-        <x-downloads.buttons :build="$build" label="" justify="start" :button="$type === 'nightly' ? 'bg-red-600 hover:bg-red-700 active:bg-red-800 focus:ring-red-200' : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 focus:ring-blue-200'"></x-downloads.buttons>
+        <x-downloads.buttons :build="$build" label="" justify="start" :button="$type === 'nightly' ? 'bg-indigo-800 hover:bg-indigo-900 active:bg-indigo-950 focus:ring-indigo-200' : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 focus:ring-blue-200'"></x-downloads.buttons>
     </div>
 </div>

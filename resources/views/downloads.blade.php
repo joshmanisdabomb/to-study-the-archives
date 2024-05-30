@@ -19,7 +19,7 @@
             <p class="py-4 px-10 rounded-lg border-[3px] border border-double border-red-400 bg-red-100 text-red-900">Nightly builds are likely to be buggy and incomplete. Please make a backup before playing.</p>
         </div>
         <div class="flex flex-row flex-wrap justify-stretch sm:justify-center items-stretch gap-y-8">
-            <x-downloads.latest :build="$nightly['to_base'] ?? null" type="nightly" class="bg-slate-700 border-black text-white" />
+            <x-downloads.latest :build="$nightly['to_base'] ?? null" type="nightly" class="bg-rose-200 border-rose-500" />
         </div>
 
         <h2 class="mt-10 mb-7 text-2xl lg:text-3xl font-bold font-heading">All Downloads</h2>
@@ -79,7 +79,10 @@
                                 <span class="border-dashed border-black border-b" title="{{ $build->released_at->format('d/m/Y H:i:s') }}">{{ $build->released_at->diffForHumans() }}</span>
                             </td>
                             <td class="px-6 py-4">
-                                <x-downloads.buttons :build="$build" sources label="" justify="start" :button="$build->nightly ? 'bg-red-600 hover:bg-red-700 active:bg-red-800 focus:ring-red-200' : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 focus:ring-blue-200'"></x-downloads.buttons>
+                                <x-downloads.buttons :build="$build" label="" justify="start"
+                                     :button="$build->nightly ? 'bg-indigo-800 hover:bg-indigo-900 active:bg-indigo-950 focus:ring-indigo-200' : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 focus:ring-blue-200'"
+                                     :source="$build->nightly ? 'bg-lavender-500 hover:bg-lavender-600 active:bg-lavender-700 focus:ring-lavender-300' : 'bg-slate-400 hover:bg-slate-500 active:bg-slate-600 focus:ring-slate-300'"
+                                ></x-downloads.buttons>
                             </td>
                         </tr>
                     @endforeach

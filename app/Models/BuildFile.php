@@ -58,6 +58,9 @@ class BuildFile extends Model
             } else {
                 $filename .= $this->build->mod_version;
             }
+            if ($this->sources) {
+                $filename .= '-sources';
+            }
             return $filename;
         });
     }
