@@ -44,9 +44,9 @@ class BuildControllerTest extends TestCase
                 'ref_name' => $data['ref_name'],
                 'commit' => $data['sha'],
                 'files' => [
-                    ['build_id' => 1, 'type' => 'forge', 'sources' => false],
                     ['build_id' => 1, 'type' => 'fabric', 'sources' => false],
                     ['build_id' => 1, 'type' => 'quilt', 'sources' => false],
+                    ['build_id' => 1, 'type' => 'forge', 'sources' => false],
                     ['build_id' => 1, 'type' => null, 'sources' => true],
                 ],
             ];
