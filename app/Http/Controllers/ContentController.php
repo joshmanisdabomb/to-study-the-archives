@@ -55,7 +55,7 @@ class ContentController extends Controller
             return $update;
         });
 
-        $update->load(['articles', 'mods', 'versions', 'builds', 'files']);
+        $update->load(['articles.bakes', 'mods', 'versions', 'builds', 'files']);
         return response()->json($update);
     }
 }
